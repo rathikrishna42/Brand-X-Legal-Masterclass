@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brand X Legal | Strategic Ownership for Founders</title>
+    <title>Build Brands Legally | Krishna Rathi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,9 +87,9 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        .hero-heading { font-size: clamp(40px, 8vw, 72px); letter-spacing: -0.04em; line-height: 1; }
-        .section-heading { font-size: clamp(28px, 5vw, 42px); letter-spacing: -0.02em; }
-        .sub-heading { font-size: clamp(16px, 2vw, 18px); line-height: 1.6; }
+        .hero-heading { font-size: clamp(36px, 8vw, 72px); letter-spacing: -0.04em; line-height: 1; }
+        .section-heading { font-size: clamp(24px, 5vw, 42px); letter-spacing: -0.02em; }
+        .sub-heading { font-size: clamp(14px, 2vw, 18px); line-height: 1.6; }
         .body-copy { font-size: 15px; line-height: 1.7; color: var(--text-muted); }
         .micro-text { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
         
@@ -103,7 +103,6 @@
             transition: transform 0.1s linear;
         }
         
-        /* Dark theme specific grid for hero */
         .hero-grid-dark {
             background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -112,7 +111,7 @@
 
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(30px);
             transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active {
@@ -216,19 +215,19 @@
             width: 100%;
             max-width: 380px;
             aspect-ratio: 4/5;
-            background: #f1f5f9;
-            border: 1px solid rgba(0,0,0,0.06);
-            border-radius: 2px;
+            background: #0a0a0a;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 4px;
             overflow: hidden;
             position: relative;
             box-shadow: 0 40px 100px -20px rgba(0,0,0,0.1);
         }
         .parallax-img {
             width: 100%;
-            height: 120%;
+            height: 110%;
             object-fit: cover;
             filter: grayscale(100%);
-            transform: translateY(var(--img-parallax, -10%));
+            transform: translateY(var(--img-parallax, 0%));
             transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.1s linear;
             will-change: transform, filter;
         }
@@ -256,8 +255,8 @@
         .hover-lift:hover { transform: translateY(-8px); }
 
         .section-padding {
-            padding-top: clamp(64px, 10vh, 128px);
-            padding-bottom: clamp(64px, 10vh, 128px);
+            padding-top: clamp(48px, 10vh, 128px);
+            padding-bottom: clamp(48px, 10vh, 128px);
         }
 
         .logo-strip img {
@@ -268,8 +267,8 @@
         .logo-strip img:hover { opacity: 0.8; filter: grayscale(0%); }
 
         .breakthrough-circle {
-            width: 240px;
-            height: 240px;
+            width: clamp(180px, 40vw, 240px);
+            height: clamp(180px, 40vw, 240px);
             border: 1px solid rgba(0,0,0,0.06);
             border-radius: 50%;
             display: flex;
@@ -280,10 +279,10 @@
         }
         .breakthrough-node {
             position: absolute;
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: white;
             border: 1px dashed #e2e8f0;
-            font-size: 11px;
+            font-size: clamp(9px, 1.5vw, 11px);
             font-weight: 800;
             text-transform: uppercase;
             border-radius: 4px;
@@ -294,33 +293,84 @@
         
         .border-soft { border-color: rgba(0,0,0,0.06); }
 
-        /* Animated Geometric Guides */
-        @keyframes line-reveal-w {
-            0% { width: 0; }
-            100% { width: 400px; }
+        /* New Hero Ambient Animation */
+        @keyframes lightSweep {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 0.15; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
         }
-        @keyframes line-reveal-h {
-            0% { height: 0; }
-            100% { height: 250px; }
-        }
-        .geometric-guide {
+        .ambient-light-sweep {
             position: absolute;
-            z-index: 10;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4), transparent);
+            z-index: -10;
             pointer-events: none;
+            animation: lightSweep 12s ease-in-out infinite;
+        }
+
+        /* Hero Background Image Styles */
+        .hero-bg-portrait {
+            position: absolute;
+            inset: 0;
+            z-index: -15;
+            width: 100%;
+            height: 100%;
+            filter: grayscale(100%) contrast(1.1) brightness(0.4);
             opacity: 0.3;
+            pointer-events: none;
+            mask-image: radial-gradient(circle at 50% 40%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+            -webkit-mask-image: radial-gradient(circle at 50% 40%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
         }
-        .guide-tl { top: 60px; left: 40px; }
-        .guide-br { bottom: 60px; right: 40px; transform: rotate(180deg); }
-        
-        /* Guide lines updated to WHITE for the black background */
-        .guide-line-h { 
-            height: 1px; background: #fff; 
-            animation: line-reveal-w 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .hero-bg-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
         }
-        .guide-line-v { 
-            width: 1px; background: #fff; 
-            animation: line-reveal-h 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.3s;
+
+        /* Premium Facilitator Section (Rajiv style layout) */
+        .facilitator-block {
+            background: #111111;
+            border-radius: 12px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr;
+            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        @media (min-width: 1024px) {
+            .facilitator-block { grid-template-columns: 1.15fr 1fr; }
+        }
+        .speaker-info-card {
+            background: #000;
+            padding: clamp(24px, 5vw, 48px);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .outcome-info-card {
+            background: #0a0a0a;
+            padding: clamp(24px, 5vw, 48px);
+            border-left: 1px solid rgba(255,255,255,0.05);
+        }
+        .impact-pointer {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 8px 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+        .impact-pointer:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateX(4px);
         }
 
         /* Responsive Modal Styles */
@@ -331,8 +381,8 @@
             z-index: 100;
             align-items: flex-start;
             justify-content: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.4);
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             overflow-y: auto;
@@ -341,9 +391,9 @@
             background: #ffffff;
             width: 100%;
             max-width: 520px;
-            padding: 48px;
-            border-radius: 2px;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.1);
+            padding: clamp(24px, 8vw, 48px);
+            border-radius: 4px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.3);
             position: relative;
             transform: translateY(20px);
             opacity: 0;
@@ -354,50 +404,14 @@
             transform: translateY(0);
             opacity: 1;
         }
-        .input-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #6b7280;
-            margin-bottom: 8px;
-        }
-        .input-field {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #e5e7eb;
-            border-radius: 4px;
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            transition: border-color 0.3s;
-        }
-        .input-field:focus {
-            outline: none;
-            border-color: #000;
-        }
 
         /* Mobile Adjustments */
         @media (max-width: 640px) {
-            nav .max-w-6xl {
-                padding-left: 0.75rem;
-                padding-right: 0.75rem;
-            }
             .nav-brand-text { font-size: 10px; }
-            .modal-container { 
-                padding: 32px 20px; 
-                margin: 10px auto; 
-            }
-            #enquiry-modal {
-                padding: 10px;
-            }
-            .modal-container h2 {
-                font-size: 1.5rem;
-            }
-            .guide-tl { left: 20px; top: 120px; }
-            .guide-br { right: 20px; bottom: 120px; }
-            @keyframes line-reveal-w-mob { 0% { width: 0; } 100% { width: 150px; } }
-            @keyframes line-reveal-h-mob { 0% { height: 0; } 100% { height: 100px; } }
-            .guide-line-h { animation-name: line-reveal-w-mob; }
-            .guide-line-v { animation-name: line-reveal-h-mob; }
+            .facilitator-block { grid-template-columns: 1fr; border-radius: 8px; }
+            .speaker-info-card { padding: 32px 20px; }
+            .outcome-info-card { padding: 32px 20px; border-left: 0; border-top: 1px solid rgba(255,255,255,0.05); }
+            .breakthrough-node { padding: 6px 12px; }
         }
     </style>
 </head>
@@ -414,36 +428,33 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
             <div class="mb-10 text-center lg:text-left">
-                <h2 class="text-3xl font-extrabold tracking-tighter text-black mb-4 text-balance">Claim Your Place at the Table</h2>
+                <h2 class="text-3xl font-extrabold tracking-tighter text-black mb-4 text-balance uppercase text-balance">Claim Your Place at the Table</h2>
                 <p class="text-sm text-slate-500 leading-relaxed">This workshop is intentionally capped to protect the quality of discussion. We review every request before confirming access.</p>
             </div>
             <form id="requestForm" onsubmit="handleRequestSubmit(event)" class="space-y-6">
                 <div class="input-group">
-                    <label>Full Name</label>
+                    <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Full Name</label>
                     <input type="text" required placeholder="Your full name" class="input-field">
                 </div>
                 <div class="input-group">
-                    <label>Company Name</label>
+                    <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Company Name</label>
                     <input type="text" required placeholder="Your company or brand" class="input-field">
                 </div>
                 <div class="input-group">
-                    <label>Company Website / Instagram Link</label>
+                    <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Company Link</label>
                     <input type="url" required placeholder="https://" class="input-field">
                 </div>
                 <div class="input-group">
-                    <label>Email ID</label>
+                    <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Email ID</label>
                     <input type="email" required placeholder="you@company.com" class="input-field">
                 </div>
                 <div class="input-group">
-                    <label>Contact Number</label>
+                    <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Contact Number</label>
                     <input type="tel" required placeholder="+91 XXXXX XXXXX" class="input-field">
                 </div>
                 <button type="submit" class="cta-primary w-full py-4 rounded-sm font-bold text-sm uppercase tracking-widest mt-4">
                     Submit Request
                 </button>
-                <p class="text-center text-[11px] font-medium text-slate-400 uppercase tracking-widest">
-                    You'll receive next steps by email.<br>No spam. No pressure.
-                </p>
             </form>
             <div id="success-message" class="hidden text-center py-12">
                 <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -460,75 +471,74 @@
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-2 sm:gap-3 shrink">
                 <div class="w-6 h-6 bg-black flex items-center justify-center rounded-sm shrink-0">
-                    <span class="text-white text-[10px] font-bold">X</span>
+                    <span class="text-white text-[8px] font-bold">X</span>
                 </div>
                 <span class="font-bold text-[10px] sm:text-sm tracking-tight whitespace-nowrap overflow-hidden nav-brand-text">BRAND X LEGAL</span>
             </div>
             <div class="hidden sm:flex gap-6 md:gap-8 items-center">
-                <a href="#problem" class="text-[10px] md:text-xs font-semibold text-slate-500 hover:text-black transition-colors uppercase tracking-widest">The Context</a>
-                <a href="#curriculum" class="text-[10px] md:text-xs font-semibold text-slate-500 hover:text-black transition-colors uppercase tracking-widest">Framework</a>
-                <button onclick="openEnquiryModal()" class="cta-primary text-white text-[9px] md:text-xs font-bold px-5 py-2.5 rounded-sm transition-all uppercase tracking-widest shadow-sm">Request a seat</button>
+                <a href="#problem" class="text-[10px] md:text-xs font-semibold text-slate-500 hover:text-black transition-colors uppercase tracking-widest">Why This Exists</a>
+                <a href="#curriculum" class="text-[10px] md:text-xs font-semibold text-slate-500 hover:text-black transition-colors uppercase tracking-widest">Walkaway</a>
+                <button onclick="openEnquiryModal()" class="cta-primary text-white text-[9px] md:text-xs font-bold px-5 py-2.5 rounded-sm transition-all uppercase tracking-widest shadow-sm">Request an Invite</button>
             </div>
             <div class="sm:hidden flex items-center">
                 <button onclick="openEnquiryModal()" class="cta-primary text-white text-[9px] font-bold uppercase tracking-tighter px-4 py-2 rounded-sm whitespace-nowrap shadow-md">
-                    Request a seat
+                    Request an Invite
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section - RESTORED CONTENT -->
+    <!-- Hero Section -->
     <section class="relative pt-40 pb-24 overflow-hidden min-h-screen flex flex-col items-center justify-center hero-section-base hero-bg-animated">
-        <div class="geometric-guide guide-tl">
-            <div class="guide-line-h"></div>
-            <div class="guide-line-v"></div>
+        <div class="hero-bg-portrait">
+            <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" alt="Krishna Rathi Background">
         </div>
-        <div class="geometric-guide guide-br">
-            <div class="guide-line-h"></div>
-            <div class="guide-line-v"></div>
-        </div>
+        
+        <div class="ambient-light-sweep"></div>
 
         <div id="hero-grid" class="absolute inset-0 hero-grid-dark opacity-40 -z-10"></div>
         
         <div class="max-w-4xl mx-auto px-6 text-center reveal active flex flex-col items-center">
-            <div class="mb-12 headline-motion" style="animation-delay: 0.1s;">
-                <div class="mb-6 inline-block px-4 py-1.5 bg-white border border-white rounded-full shadow-lg">
-                    <p class="text-[10px] md:text-xs font-extrabold text-black uppercase tracking-[0.2em]">
-                        Limited Cohort of 30 Founders
-                    </p>
+            <div class="mb-14 headline-motion" style="animation-delay: 0.1s;">
+                <div class="mb-10 inline-block px-4 py-1.5 bg-white border border-white rounded-full shadow-lg">
+                    <p class="text-[10px] md:text-xs font-extrabold text-black uppercase tracking-[0.2em]">Limited Cohort of 30 Founders</p>
                 </div>
-                <h3 class="text-[11px] md:text-xs font-black tracking-[0.4em] text-white uppercase block mb-2 opacity-90">Masterclass by Krishna Rathi</h3>
-                <div class="w-8 h-[1px] bg-indigo-500 mx-auto mb-6"></div>
+                <!-- Signature Style Krishna Rathi - Adjusted position -->
+                <div class="mt-4">
+                    <h3 class="text-[11px] md:text-xs font-black tracking-[0.4em] text-white uppercase block mb-2 opacity-90 leading-none">
+                        Masterclass by <span class="scribble-highlight text-2xl md:text-3xl lg:text-4xl normal-case tracking-normal ml-2 text-[#40EADB] align-middle">Krishna Rathi</span>
+                    </h3>
+                    <div class="w-8 h-[1px] bg-[#40EADB] mx-auto mb-6"></div>
+                </div>
             </div>
-            
             <div class="mb-14 headline-motion" style="animation-delay: 0.3s;">
                 <h1 class="hero-heading font-extrabold text-white mb-8 leading-tight text-balance uppercase">Build a Brand You <br> Actually Own.</h1>
                 <div class="w-20 h-[1px] bg-white/20 mx-auto mb-8"></div>
-                <p class="text-lg md:text-2xl font-medium text-slate-300 tracking-tight mb-4 text-balance">Where Brand Strategy Meets Legal Control.</p>
+                <p class="text-lg md:text-2xl font-medium text-slate-300 tracking-tight mb-4 text-balance italic">Where Brand Strategy Meets Legal Control.</p>
             </div>
-            
             <div class="flex flex-col items-center gap-10 headline-motion w-full" style="animation-delay: 0.6s;">
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-5 w-full max-w-lg px-4 sm:px-0">
-                    <button onclick="openEnquiryModal()" class="cta-primary !bg-white !text-black px-10 py-5 rounded-sm font-bold text-xs uppercase tracking-[0.2em] w-full sm:w-auto text-center shadow-[0_15px_40px_rgba(255,255,255,0.1)]">Request a seat</button>
-                    <a href="#curriculum" class="cta-secondary !bg-white/10 !text-white px-10 py-5 rounded-sm font-bold text-xs uppercase tracking-[0.2em] w-full sm:w-auto text-center border-white/20 hover:!bg-white/20 transition-all">Review Framework</a>
+                <div class="flex flex-col items-center w-full">
+                    <!-- Date and Time added above CTA -->
+                    <p class="text-[10px] md:text-xs font-bold text-[#40EADB] uppercase tracking-[0.4em] mb-8">February 9, 2026 • 11:00 AM IST</p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-5 w-full max-w-lg px-4 sm:px-0">
+                        <button onclick="openEnquiryModal()" class="cta-primary !bg-white !text-black px-10 py-5 rounded-sm font-bold text-xs uppercase tracking-[0.2em] w-full sm:w-auto text-center shadow-[0_15px_40px_rgba(255,255,255,0.1)]">Request an Invite</button>
+                        <a href="#curriculum" class="cta-secondary !bg-white/10 !text-white px-10 py-5 rounded-sm font-bold text-xs uppercase tracking-[0.2em] w-full sm:w-auto text-center border-white/20 hover:!bg-white/20 transition-all">Review Framework</a>
+                    </div>
                 </div>
-                
                 <div class="pt-20 w-full max-w-3xl border-t border-white/10">
                     <p class="micro-text text-slate-500 mb-8 font-bold tracking-[0.4em]">TRUSTED TO SPEAK, TRUSTED TO BUILD</p>
-                    <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 text-white/40">
-                        <span class="text-xs sm:text-sm font-extrabold tracking-widest uppercase hover:text-white transition-colors duration-500">JOSH TALKS</span>
-                        <span class="text-xs sm:text-sm font-extrabold tracking-widest uppercase hover:text-white transition-colors duration-500">IIT MADRAS</span>
-                        <span class="text-xs sm:text-sm font-extrabold tracking-widest uppercase hover:text-white transition-colors duration-500">INDUSTRY FORUMS</span>
-                    </div>
-                    <div class="mt-8 flex justify-center text-white/40">
-                        <span class="text-xs sm:text-sm font-extrabold tracking-widest uppercase hover:text-white transition-colors duration-500">FOUNDER COMM.</span>
+                    <div class="flex flex-wrap justify-center items-center gap-x-8 sm:gap-x-12 gap-y-8 text-white/40">
+                        <span class="text-xs sm:text-sm font-extrabold tracking-widest uppercase">JOSH TALKS</span>
+                        <span class="text-xs sm:text-sm font-extrabold tracking-widest uppercase">IIT MADRAS</span>
+                        <span class="text-xs sm:text-sm font-extrabold tracking-widest uppercase">INDUSTRY FORUMS</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Outcomes Artifacts - RESTORED CONTENT -->
+    <!-- Outcomes Artifacts -->
     <section class="section-padding bg-white relative overflow-hidden border-y border-soft">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 md:24 reveal text-black">
@@ -539,36 +549,36 @@
             
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-soft reveal">
                 <div class="p-8 md:p-10 border-r border-b border-soft hover-lift transition-all text-black">
-                    <p class="text-xs font-bold text-black mb-8 opacity-30 uppercase tracking-widest">01 / MAP</p>
-                    <h4 class="font-bold mb-4 text-lg md:text-xl tracking-tight text-black">Brand Risk Map</h4>
-                    <p class="text-sm text-slate-500 font-light">A R/A/G assessment tool to audit your current brand assets against legal threats.</p>
+                    <p class="text-xs font-bold text-black mb-8 opacity-30 uppercase tracking-widest">01 / VALIDATION</p>
+                    <h4 class="font-bold mb-4 text-lg md:text-xl tracking-tight text-black">Name Validation Framework</h4>
+                    <p class="text-sm text-slate-500 font-light">Validate brand names before spending or scaling resources.</p>
                 </div>
                 <div class="p-8 md:p-10 border-r border-b border-soft hover-lift transition-all text-black">
-                    <p class="text-xs font-bold text-black mb-8 opacity-30 uppercase tracking-widest">02 / PLAN</p>
-                    <h4 class="font-bold mb-4 text-lg md:text-xl tracking-tight text-black">Filing Roadmap</h4>
-                    <p class="text-sm text-slate-500 font-light">A prioritized timeline of what to register, when to file, and in which jurisdictions.</p>
+                    <p class="text-xs font-bold text-black mb-8 opacity-30 uppercase tracking-widest">02 / OWNERSHIP</p>
+                    <h4 class="font-bold mb-4 text-lg md:text-xl tracking-tight text-black">True Ownership Audit</h4>
+                    <p class="text-sm text-slate-500 font-light">Determine who truly owns your brand: you, your company, or someone else.</p>
                 </div>
                 <div class="p-8 md:p-10 border-r border-b border-soft hover-lift transition-all text-black">
-                    <p class="text-xs font-bold text-black mb-8 opacity-30 uppercase tracking-widest">03 / STACK</p>
-                    <h4 class="font-bold mb-4 text-lg md:text-xl tracking-tight text-black">Contract Stack</h4>
-                    <p class="text-sm text-slate-500 font-light">Founder-first IP clauses for agencies, creators, and vendors to ensure asset retention.</p>
+                    <p class="text-xs font-bold text-black mb-8 opacity-30 uppercase tracking-widest">03 / ACQUISITION</p>
+                    <h4 class="font-bold mb-4 text-lg md:text-xl tracking-tight text-black">Red Flag Detection</h4>
+                    <p class="text-sm text-slate-500 font-light">Identify the legal red flags that kill funding rounds and acquisitions.</p>
                 </div>
                 <div class="p-8 md:p-10 border-r border-b border-soft hover-lift transition-all text-black">
-                    <p class="text-xs font-bold text-black mb-8 opacity-30 uppercase tracking-widest">04 / AUDIT</p>
-                    <h4 class="font-bold mb-4 text-lg md:text-xl tracking-tight text-black">Valuation Checklist</h4>
-                    <p class="text-sm text-slate-500 font-light">A 20-point IP health-check investors run during the series A/B due diligence process.</p>
+                    <p class="text-xs font-bold text-black mb-8 opacity-30 uppercase tracking-widest">04 / DEFENSE</p>
+                    <h4 class="font-bold mb-4 text-lg md:text-xl tracking-tight text-black">Creator Armor</h4>
+                    <p class="text-sm text-slate-500 font-light">Air-tight protection from agency, influencer, and collaborator IP traps.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Facilitators Section -->
-    <section class="section-padding relative overflow-hidden bg-white/40 border-b border-soft">
+    <section class="section-padding relative overflow-hidden bg-[#000] border-y border-white/5">
         <div class="max-w-6xl mx-auto px-6">
             <div class="mb-24 text-center reveal">
                 <p class="micro-text text-slate-400 mb-4 tracking-[0.3em]">Instruction & Insight</p>
-                <div class="relative inline-block">
-                    <h2 class="text-4xl md:text-6xl font-extrabold tracking-tighter text-black">Masters of the Craft.</h2>
+                <div class="relative inline-block mb-4">
+                    <h2 class="text-4xl md:text-6xl font-extrabold tracking-tighter text-white uppercase">Masters of the Craft.</h2>
                     <div class="absolute -right-20 -top-6 hidden lg:block transform rotate-12 opacity-30 pointer-events-none select-none">
                         <span class="text-sm font-serif italic text-slate-500">"Built from experience."</span>
                         <svg class="w-full h-2 text-black/40 mt-1" viewBox="0 0 100 10" preserveAspectRatio="none">
@@ -579,77 +589,134 @@
                 <p class="mt-8 text-slate-400 font-medium tracking-tight text-balance italic">This workshop is led by brand strategy and grounded in legal architecture.</p>
             </div>
             
-            <div class="relative space-y-12 lg:space-y-0">
-                <div class="absolute inset-0 pointer-events-none z-0 hidden lg:flex justify-between items-center px-10">
-                    <span class="text-[300px] font-black text-slate-900/[0.02] select-none transform -translate-x-20">KR</span>
-                    <span class="text-[300px] font-black text-slate-900/[0.02] select-none transform translate-x-20 translate-y-40">VP</span>
+            <div class="space-y-24">
+                <!-- Krishna Rathi Block -->
+                <div class="facilitator-block reveal">
+                    <div class="speaker-info-card">
+                        <div class="flex flex-col items-center lg:items-start w-full">
+                            <p class="text-[#40EADB] text-[10px] md:text-sm font-bold mb-6 uppercase tracking-widest">I will be your coach for next 3 hrs</p>
+                            
+                            <div class="profile-image-wrapper group mb-8">
+                                <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" alt="Krishna Rathi" class="parallax-img profile-trigger">
+                                <div class="absolute bottom-0 left-0 w-full p-6 sm:p-8 bg-gradient-to-t from-black via-black/40 to-transparent">
+                                    <h3 class="text-2xl md:text-4xl font-extrabold text-white tracking-tighter">Krishna Rathi</h3>
+                                    <p class="text-[9px] md:text-[10px] font-bold text-[#40EADB] uppercase tracking-widest mt-1">Workshop Lead · Brand Strategist</p>
+                                </div>
+                            </div>
+
+                            <div class="text-center lg:text-left">
+                                <p class="text-slate-300 text-sm md:text-base leading-relaxed font-light mb-10 max-w-sm mx-auto lg:mx-0 italic border-l-2 border-slate-800 pl-6">
+                                    Krishna works with founders at inflection points translating early vision into brand systems that scale, endure scrutiny, and hold enterprise value.
+                                </p>
+                                
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+                                    <div class="impact-pointer">
+                                        <span class="text-white font-black text-xs">10+</span>
+                                        <span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Years Experience</span>
+                                    </div>
+                                    <div class="impact-pointer">
+                                        <span class="text-white font-black text-xs">2000+</span>
+                                        <span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Brand Concepts</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-4 justify-center lg:justify-start">
+                                    <a href="https://www.linkedin.com/in/rathikrishna42/" target="_blank" class="text-slate-600 hover:text-white transition-colors" title="LinkedIn">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                    </a>
+                                    <a href="https://www.instagram.com/rathikrishna42" target="_blank" class="text-slate-600 hover:text-white transition-colors" title="Instagram">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.058-1.69-.072-4.949-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="outcome-info-card">
+                        <h4 class="text-xl font-bold text-white mb-6 uppercase tracking-tighter">What Happens When You Join?</h4>
+                        <div class="w-8 h-1 bg-[#40EADB] mb-8"></div>
+                        <ul class="space-y-6">
+                            <li class="flex items-start gap-4">
+                                <span class="flex-shrink-0 w-5 h-5 bg-[#40EADB]/20 text-[#40EADB] rounded-full flex items-center justify-center text-[10px]">✔</span>
+                                <p class="text-sm text-slate-400 leading-snug">You get absolute clarity on whether your brand is <strong class="text-white">legally safe</strong> or silently exposed.</p>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span class="flex-shrink-0 w-5 h-5 bg-[#40EADB]/20 text-[#40EADB] rounded-full flex items-center justify-center text-[10px]">✔</span>
+                                <p class="text-sm text-slate-400 leading-snug">Learn the framework to <strong class="text-white">validate brand names</strong> before spending or scaling.</p>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span class="flex-shrink-0 w-5 h-5 bg-[#40EADB]/20 text-[#40EADB] rounded-full flex items-center justify-center text-[10px]">✔</span>
+                                <p class="text-sm text-slate-400 leading-snug">Understand who <strong class="text-white">truly owns</strong> your brand concept you or a third party.</p>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span class="flex-shrink-0 w-5 h-5 bg-[#40EADB]/20 text-[#40EADB] rounded-full flex items-center justify-center text-[10px]">✔</span>
+                                <p class="text-sm text-slate-400 leading-snug">Identify hidden <strong class="text-white">legal red flags</strong> that deflation acquisition valuations.</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Krishna Rathi Profile -->
-                <div class="relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-24 reveal">
-                    <div class="w-full lg:w-1/2 flex flex-col items-center lg:items-end">
-                        <div class="profile-image-wrapper floating-element group">
-                             <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" alt="Krishna Rathi" class="parallax-img profile-trigger">
-                             <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent lg:hidden flex flex-col justify-end">
-                                <h3 class="text-2xl font-extrabold text-white tracking-tighter">Krishna Rathi</h3>
-                                <p class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mt-1">Workshop Lead · Brand Strategist</p>
-                             </div>
-                             <div class="absolute bottom-10 left-[-20px] w-full p-6 bg-white transform -rotate-90 origin-bottom-left shadow-sm">
-                                <p class="text-[10px] font-black tracking-[0.5em] text-slate-400 uppercase">THE STRATEGIST</p>
-                             </div>
-                        </div>
-                        <div class="flex gap-4 mt-6 lg:mt-8">
-                            <a href="https://www.linkedin.com/in/rathikrishna42/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-indigo-600 transition-all duration-300" title="LinkedIn">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                            </a>
-                            <a href="https://www.instagram.com/rathikrishna42" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-pink-600 transition-all duration-300" title="Instagram">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.058-1.69-.072-4.949-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="w-full lg:w-1/2 max-w-lg text-black">
-                        <div class="flex items-center gap-3 mb-6">
-                        </div>
-                        <h3 class="hidden lg:block text-4xl md:text-5xl font-extrabold text-black tracking-tighter mb-2">Krishna Rathi</h3>
-                        <p class="hidden lg:block text-[12px] font-bold text-indigo-600 uppercase tracking-[0.3em] mb-8">Workshop Lead · Brand Strategist</p>
-                        <div class="space-y-6 body-copy font-light leading-relaxed text-xl text-slate-600 border-l-2 border-soft pl-8 italic">
-                            <p>Krishna works with founders at inflection points translating early vision into brand systems that scale, endure scrutiny, and hold enterprise value.</p>
-                            <p class="not-italic text-lg font-normal text-slate-500">His work sits at the intersection of positioning, ownership, and long-term brand architecture.</p>
-                        </div>
-                    </div>
-                </div>
+                <!-- Vishal Panjwani Block -->
+                <div class="facilitator-block reveal">
+                    <div class="speaker-info-card">
+                        <div class="flex flex-col items-center lg:items-start w-full text-black">
+                            <p class="text-[#40EADB] text-[10px] md:text-sm font-bold mb-6 uppercase tracking-widest">Defending Your Ownership</p>
+                            
+                            <div class="profile-image-wrapper group mb-8">
+                                <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770451145/1710957296193_zss2ry.jpg" alt="Vishal Panjwani" class="parallax-img profile-trigger" style="object-position: center 5%;">
+                                <div class="absolute bottom-0 left-0 w-full p-6 sm:p-8 bg-gradient-to-t from-black via-black/40 to-transparent">
+                                    <h3 class="text-2xl md:text-4xl font-extrabold text-white tracking-tighter">Vishal Panjwani</h3>
+                                    <p class="text-[9px] md:text-[10px] font-bold text-[#40EADB] uppercase tracking-widest mt-1">Legal Architect · Strategic Advisor</p>
+                                </div>
+                            </div>
 
-                <div class="hidden lg:block h-32"></div>
+                            <div class="text-center lg:text-left">
+                                <p class="text-slate-300 text-sm md:text-base leading-relaxed font-light mb-10 max-w-sm mx-auto lg:mx-0 italic border-l-2 border-slate-800 pl-6">
+                                    Vishal transforms legal complexity into advantage, guiding high-growth ventures to build defensible foundations before gaps become liabilities.
+                                </p>
 
-                <!-- Vishal Panjwani Profile -->
-                <div class="relative z-10 flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-24 reveal">
-                    <div class="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-black">
-                        <div class="profile-image-wrapper floating-element-delayed group">
-                             <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770451145/1710957296193_zss2ry.jpg" alt="Vishal Panjwani" class="parallax-img profile-trigger" style="object-position: center 5%;">
-                             <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/90 via-black/40 to-transparent lg:hidden flex flex-col justify-end">
-                                <h3 class="text-2xl font-extrabold text-white tracking-tighter">Vishal Panjwani</h3>
-                                <p class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mt-1">Legal Architect · Strategic Advisor</p>
-                             </div>
-                        </div>
-                        
-                        <div class="flex gap-4 mt-6 lg:mt-8">
-                            <a href="https://www.linkedin.com/in/csvishalpanjwani/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-indigo-600 transition-all duration-300" title="LinkedIn">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                            </a>
-                            <a href="https://www.instagram.com/weshallmusic" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-pink-600 transition-all duration-300" title="Instagram">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.058-1.69-.072-4.949-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                            </a>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+                                    <div class="impact-pointer">
+                                        <span class="text-white font-black text-xs">Vetted</span>
+                                        <span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Startup Foundations</span>
+                                    </div>
+                                    <div class="impact-pointer">
+                                        <span class="text-white font-black text-xs">Elite</span>
+                                        <span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Risk Management</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-4 justify-center lg:justify-start">
+                                    <a href="https://www.linkedin.com/in/csvishalpanjwani/" target="_blank" class="text-slate-600 hover:text-white transition-colors" title="LinkedIn">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                    </a>
+                                    <a href="https://www.instagram.com/weshallmusic" target="_blank" class="text-slate-600 hover:text-white transition-colors" title="Instagram">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.058-1.69-.072-4.949-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="w-full lg:w-1/2 max-w-lg text-left lg:text-right text-black">
-                        <div class="flex items-center justify-start lg:justify-end gap-3 mb-6 text-black">
-                        </div>
-                        <h3 class="hidden lg:block text-4xl md:text-5xl font-extrabold text-black tracking-tighter mb-4">Vishal Panjwani</h3>
-                        <p class="hidden lg:block text-[12px] font-bold text-indigo-600 uppercase tracking-[0.3em] mb-8">Legal Architect · Strategic Advisor</p>
-                        <div class="space-y-6 body-copy font-light leading-relaxed text-xl italic mb-10 text-slate-600 border-r-2 lg:border-r-2 lg:border-l-0 border-soft pr-8 lg:pr-8 lg:pl-0">
-                            <p>"Vishal helps founders transform legal complexity into strategic advantage. He guides high-growth ventures to build legally defensible foundations long before gaps become liabilities."</p>
-                            <p class="not-italic text-lg font-normal text-slate-500">Ensures business decisions are grounded in structure and protectable ownership, not hindsight.</p>
-                        </div>
+                    <div class="outcome-info-card">
+                        <h4 class="text-xl font-bold text-white mb-6 uppercase tracking-tighter text-balance">The Defense Strategy</h4>
+                        <div class="w-8 h-1 bg-[#40EADB] mb-8"></div>
+                        <ul class="space-y-6">
+                            <li class="flex items-start gap-4">
+                                <span class="flex-shrink-0 w-5 h-5 bg-[#40EADB]/20 text-[#40EADB] rounded-full flex items-center justify-center text-[10px]">✔</span>
+                                <p class="text-sm text-slate-400 leading-snug text-balance">Protection from <strong class="text-white">agency & influencer</strong> IP assignment traps.</p>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span class="flex-shrink-0 w-5 h-5 bg-[#40EADB]/20 text-[#40EADB] rounded-full flex items-center justify-center text-[10px]">✔</span>
+                                <p class="text-sm text-slate-400 leading-snug text-balance">Strategic <strong class="text-white">trademark roadmaps</strong> aligned with business growth.</p>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span class="flex-shrink-0 w-5 h-5 bg-[#40EADB]/20 text-[#40EADB] rounded-full flex items-center justify-center text-[10px]">✔</span>
+                                <p class="text-sm text-slate-400 leading-snug text-balance">Expertise in <strong class="text-white">risk management</strong> and startup compliance.</p>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span class="flex-shrink-0 w-5 h-5 bg-[#40EADB]/20 text-[#40EADB] rounded-full flex items-center justify-center text-[10px]">✔</span>
+                                <p class="text-sm text-slate-400 leading-snug text-balance">Guaranteed steps to ensure <strong class="text-white">protectable ownership</strong>.</p>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -657,12 +724,12 @@
     </section>
 
     <!-- The Context (Why This Exists) -->
-    <section id="problem" class="section-padding border-b border-soft relative overflow-hidden bg-white text-black text-black">
+    <section id="problem" class="section-padding border-b border-soft relative overflow-hidden bg-white text-black">
         <div class="max-w-6xl mx-auto px-6 reveal text-black">
             <div class="flex flex-col md:flex-row gap-12 lg:gap-24 items-start">
                 <div class="md:w-1/3 md:sticky md:top-32 text-black">
                     <p class="micro-text text-slate-400 mb-6 uppercase tracking-widest">The Context</p>
-                    <h2 class="text-3xl md:text-4xl font-extrabold tracking-tighter leading-[1.1] text-black text-balance">Why This Workshop <br> Exists.</h2>
+                    <h2 class="text-3xl md:text-4xl font-extrabold tracking-tighter leading-[1.1] text-black text-balance uppercase">Why This Workshop <br> Exists.</h2>
                 </div>
                 <div class="md:w-2/3 md:border-l border-soft md:pl-16 relative text-black">
                     <div class="space-y-12 text-black">
@@ -687,9 +754,8 @@
 
     <!-- Scarcity Section -->
     <section class="section-padding bg-black text-white relative overflow-hidden">
-        <!-- Structural Background Pattern -->
         <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(99,102,241,0.3),transparent_65%)]"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(64,234,219,0.3),transparent_65%)]"></div>
             <div class="absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 60px 60px;"></div>
         </div>
 
@@ -697,15 +763,15 @@
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="order-2 lg:order-1">
                     <p class="micro-text text-slate-500 mb-8 tracking-[0.3em]">Integrity of Instruction</p>
-                    <h2 class="hero-heading font-extrabold tracking-tighter mb-8 leading-none">The 30-Founder<br>Mandate.</h2>
+                    <h2 class="hero-heading font-extrabold tracking-tighter mb-8 leading-none uppercase text-balance">The 30-Founder<br>Mandate.</h2>
                     <p class="body-copy text-slate-400 text-lg mb-12 max-w-md">Seats are intentionally limited to maintain quality and relevance. Curated cohorts only.</p>
-                    <button onclick="openEnquiryModal()" class="cta-primary !bg-white !text-black px-12 py-5 rounded-sm font-bold text-xs uppercase tracking-[0.2em] shadow-[0_20px_50px_rgba(255,255,255,0.1)]">Apply Now</button>
+                    <button onclick="openEnquiryModal()" class="cta-primary !bg-white !text-black px-12 py-5 rounded-sm font-bold text-xs uppercase tracking-[0.2em] shadow-[0_20px_50px_rgba(255,255,255,0.1)]">Request an Invite</button>
                 </div>
                 <div class="order-1 lg:order-2 relative flex flex-col items-center justify-center py-12 lg:py-0">
                     <div class="text-[160px] md:text-[240px] font-black text-white/[0.03] leading-none select-none">30</div>
                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <div class="w-64 h-64 md:w-80 md:h-80 border border-white/10 rounded-full flex flex-col items-center justify-center floating-element bg-white/5 backdrop-blur-md shadow-[0_0_100px_rgba(99,102,241,0.15)] transition-transform duration-700 hover:scale-105">
-                            <p class="text-[12px] md:text-[14px] font-black uppercase tracking-[0.5em] text-indigo-400 mb-2">CAPPED</p>
+                        <div class="w-64 h-64 md:w-80 md:h-80 border border-white/10 rounded-full flex flex-col items-center justify-center floating-element bg-white/5 backdrop-blur-md shadow-[0_0_100px_rgba(64,234,219,0.15)] transition-transform duration-700 hover:scale-105">
+                            <p class="text-[12px] md:text-[14px] font-black uppercase tracking-[0.5em] text-[#40EADB] mb-2 uppercase">CAPPED</p>
                             <p class="text-8xl md:text-9xl font-black text-white leading-none">30</p>
                             <p class="text-[10px] md:text-[12px] font-bold text-slate-500 uppercase tracking-widest mt-4">Founders</p>
                         </div>
@@ -719,8 +785,8 @@
     <section class="section-padding relative bg-black text-white">
         <div class="max-w-6xl mx-auto px-6">
             <div class="mb-24">
-                <p class="micro-text text-slate-500 mb-4">Workshop Breakdown</p>
-                <h2 class="section-heading font-extrabold tracking-tight text-white">Pillars of Control.</h2>
+                <p class="micro-text text-slate-500 mb-4 tracking-[0.3em]">Workshop Breakdown</p>
+                <h2 class="section-heading font-extrabold tracking-tight text-white uppercase">Pillars of Control.</h2>
             </div>
             <div id="pillars-container" class="relative pl-6 sm:pl-12 md:pl-20 border-l border-white/10">
                 <div class="pillar-track">
@@ -777,18 +843,18 @@
         <div class="max-w-4xl mx-auto px-6 reveal text-black">
             <div class="text-center mb-16 md:24 text-black">
                 <p class="micro-text text-slate-400 mb-4 tracking-[0.3em]">Structural Investment</p>
-                <h2 class="section-heading font-extrabold tracking-tight text-black">Join the Next Cohort.</h2>
-                <p class="text-sm font-bold text-slate-400 mt-4 uppercase tracking-[0.1em]">Shared upon application for curated founders only.</p>
+                <h2 class="section-heading font-extrabold tracking-tight text-black uppercase">Join the Next Cohort.</h2>
+                <p class="text-sm font-bold text-slate-400 mt-4 uppercase tracking-widest">Shared upon application for curated founders only.</p>
             </div>
 
-            <div class="glass-card border border-soft p-8 md:p-16 lg:p-20 relative shadow-2xl transition-all duration-700 hover:shadow-indigo-500/5 floating-element text-black">
+            <div class="glass-card border border-soft p-8 md:p-16 lg:p-20 relative shadow-2xl transition-all duration-700 hover:shadow-[#40EADB]/5 floating-element text-black">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-12 text-black">
                     <div>
                         <p class="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 text-black">Strategic Workshop Pass</p>
                         <div class="flex items-baseline gap-4">
                             <p class="text-6xl font-black tracking-tighter text-black">₹1,999</p>
                         </div>
-                        <p class="text-xs font-bold text-indigo-600 mt-4 uppercase tracking-widest">Next Cohort: February 9, 2026</p>
+                        <p class="text-xs font-bold text-[#40EADB] mt-4 uppercase tracking-widest">Next Cohort: February 9, 2026</p>
                     </div>
                     <div class="text-left md:text-right">
                         <div class="space-y-1">
@@ -800,7 +866,7 @@
                     </div>
                 </div>
 
-                <div class="space-y-4 md:space-y-6 mb-12 border-t border-soft pt-10">
+                <div class="space-y-4 md:space-y-6 mb-12 border-t border-soft pt-10 text-black">
                     <div class="flex items-center gap-4 text-xs md:text-sm font-medium text-slate-600">
                         <span class="w-1.5 h-1.5 bg-black rounded-full"></span> This is a strategic session, not a filing tutorial.
                     </div>
@@ -809,7 +875,7 @@
                     </div>
                 </div>
 
-                <button onclick="openEnquiryModal()" class="cta-primary w-full text-white py-6 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] rounded-sm shadow-xl active:scale-[0.98]">Apply for authorization</button>
+                <button onclick="openEnquiryModal()" class="cta-primary w-full text-white py-6 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] rounded-sm shadow-xl active:scale-[0.98]">Request an Invite</button>
             </div>
         </div>
     </section>
@@ -825,7 +891,7 @@
                 <a href="#" class="hover:text-black transition-colors">Twitter</a>
                 <a href="#" class="hover:text-black transition-colors">LinkedIn</a>
             </div>
-            <p class="text-[10px] md:text-[11px] text-slate-400 text-center md:text-right">&copy; 2026 Krishna Rathi. Brand Control for Founders.</p>
+            <p class="text-[10px] md:text-[11px] text-slate-400 text-center md:text-right uppercase">&copy; 2026 Krishna Rathi. Brand Control for Founders.</p>
         </div>
     </footer>
 
@@ -834,7 +900,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        }, { threshold: 0.1 });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -851,8 +917,6 @@
             modal.classList.remove('active');
             setTimeout(() => {
                 modal.style.display = 'none';
-                document.getElementById('requestForm').classList.remove('hidden');
-                document.getElementById('success-message').classList.add('hidden');
                 document.body.style.overflow = 'auto';
             }, 500);
         }
@@ -877,14 +941,13 @@
 
             const geometry = new THREE.BufferGeometry();
             const vertices = [];
-            for (let i = 0; i < 1800; i++) {
-                vertices.push(THREE.MathUtils.randFloatSpread(2200), THREE.MathUtils.randFloatSpread(2200), THREE.MathUtils.randFloatSpread(2200));
+            for (let i = 0; i < 1200; i++) {
+                vertices.push(THREE.MathUtils.randFloatSpread(2000), THREE.MathUtils.randFloatSpread(2000), THREE.MathUtils.randFloatSpread(2000));
             }
             geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-            const material = new THREE.PointsMaterial({ color: 0x000000, size: 1.5, transparent: true, opacity: 0.12 });
+            const material = new THREE.PointsMaterial({ color: 0x000000, size: 1.5, transparent: true, opacity: 0.1 });
             cloud = new THREE.Points(geometry, material);
             scene.add(cloud);
-
             camera.position.z = 500;
         }
 
@@ -935,17 +998,17 @@
             // Profile Image Parallax & Color Reveal Logic
             const viewportCenter = window.innerHeight / 2;
             document.querySelectorAll('.parallax-img').forEach(img => {
-                const rect = img.parentElement.getBoundingClientRect();
+                const wrapper = img.parentElement;
+                const rect = wrapper.getBoundingClientRect();
                 const center = rect.top + rect.height / 2;
                 
                 // Parallax Calculation
                 const parallaxDistance = (viewportCenter - center) * 0.1;
-                // Clamping to keep image within taller bounds
-                const offset = Math.max(-15, Math.min(10, parallaxDistance));
-                img.style.setProperty('--img-parallax', `${offset - 10}%`);
+                const offset = Math.max(-10, Math.min(10, parallaxDistance));
+                img.style.setProperty('--img-parallax', `${offset}%`);
 
                 // Reveal Color when centered
-                if (Math.abs(viewportCenter - center) < 200) {
+                if (Math.abs(viewportCenter - center) < 300) {
                     img.classList.add('revealed');
                 } else {
                     img.classList.remove('revealed');
