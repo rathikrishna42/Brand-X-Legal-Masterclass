@@ -287,25 +287,27 @@
     <!-- Nav -->
     <nav class="fixed w-full top-0 left-0 z-50 bg-[#f9fafb]/90 backdrop-blur-md border-b border-soft">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-6 h-6 bg-black flex items-center justify-center rounded-sm"><span class="text-white text-[8px] font-bold">X</span></div>
-                <span class="font-bold text-xs tracking-widest uppercase">BUILD BRANDS LEGALLY</span>
+            <div class="flex items-center gap-2 md:gap-3 shrink-0">
+                <div class="w-5 h-5 md:w-6 md:h-6 bg-black flex items-center justify-center rounded-sm"><span class="text-white text-[7px] md:text-[8px] font-bold">X</span></div>
+                <span class="font-bold text-[9px] md:text-xs tracking-widest uppercase whitespace-nowrap">BUILD BRANDS LEGALLY</span>
             </div>
-            <div class="hidden md:flex gap-10 items-center">
-                <a href="#problem" class="text-[10px] font-bold text-slate-500 hover:text-black transition-colors uppercase tracking-[0.2em]">The Problem</a>
-                <a href="#audience" class="text-[10px] font-bold text-slate-500 hover:text-black transition-colors uppercase tracking-[0.2em]">Is This For You?</a>
-                <button onclick="openEnquiryModal()" class="cta-primary text-white text-[10px] font-bold px-6 py-2.5 rounded-sm uppercase tracking-[0.2em]">Apply to Join</button>
-            </div>
-            <div class="md:hidden">
-                <button onclick="openEnquiryModal()" class="cta-primary text-white text-[9px] font-bold px-4 py-2 rounded-sm uppercase tracking-widest">Apply</button>
+            <div class="flex gap-4 md:gap-10 items-center">
+                <a href="#problem" class="text-[8px] md:text-[10px] font-bold text-slate-500 hover:text-black transition-colors uppercase tracking-[0.2em] whitespace-nowrap">The Problem</a>
+                <a href="#audience" class="hidden sm:inline-block text-[8px] md:text-[10px] font-bold text-slate-500 hover:text-black transition-colors uppercase tracking-[0.2em] whitespace-nowrap">Is This For You?</a>
+                <button onclick="openEnquiryModal()" class="cta-primary text-white text-[8px] md:text-[10px] font-bold px-3 md:px-6 py-2 md:py-2.5 rounded-sm uppercase tracking-[0.2em] whitespace-nowrap">Apply to Join</button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="relative pt-32 pb-24 overflow-hidden min-h-[90vh] md:min-h-screen flex flex-col items-center justify-center hero-section-base hero-bg-animated">
-        <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
-            <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" alt="Background" class="w-full h-full object-cover grayscale brightness-50">
+        <!-- Background Image Container: Synchronized layout for both mobile and desktop (w-1/2 and right-0) -->
+        <div class="absolute inset-y-0 right-0 z-0 w-1/2 pointer-events-none overflow-hidden">
+            <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" 
+                 alt="Background" 
+                 class="w-full h-full object-cover grayscale brightness-100 contrast-125 object-center opacity-100 md:opacity-90 transition-all duration-1000">
+            <!-- Fade to black to ensure text legibility -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
         </div>
         
         <div class="ambient-light-sweep"></div>
@@ -449,7 +451,7 @@
                             </div>
                             <div class="flex-1">
                                 <h3 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight">Who Owns Your Brand</h3>
-                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">(Hint: it might not be you). Determine true equity before the scale starts.</p>
+                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">(Hint: it might not be you). Determine true <span class="text-white font-bold">equity</span> before the scale starts.</p>
                             </div>
                         </div>
                     </div>
@@ -461,7 +463,7 @@
                             </div>
                             <div class="flex-1">
                                 <h3 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight">Validating Names</h3>
-                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">Learn the framework to validate names before you spend lakhs on them.</p>
+                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">Learn the <span class="text-white font-bold">framework</span> to validate names before you spend lakhs on them.</p>
                             </div>
                         </div>
                     </div>
@@ -473,7 +475,7 @@
                             </div>
                             <div class="flex-1">
                                 <h3 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight">Trademark Strategy</h3>
-                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">Aligning your IP filings with your funding roadmap and exit goals.</p>
+                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">Aligning your <span class="text-white font-bold">IP filings</span> with your funding roadmap and <span class="text-white font-bold">exit goals</span>.</p>
                             </div>
                         </div>
                     </div>
@@ -485,7 +487,7 @@
                             </div>
                             <div class="flex-1">
                                 <h3 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight">The Legal Traps</h3>
-                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">Identifying loopholes in agency contracts, influencer deals, and co-founder splits.</p>
+                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">Identifying <span class="text-white font-bold">loopholes</span> in agency contracts, influencer deals, and co-founder splits.</p>
                             </div>
                         </div>
                     </div>
@@ -497,7 +499,7 @@
                             </div>
                             <div class="flex-1">
                                 <h3 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight">The Unfundable Brand</h3>
-                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">Why some brands are toxic to investors and how to fix the documentation today.</p>
+                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">Why some brands are toxic to investors and how to <span class="text-white font-bold">fix the documentation</span> today.</p>
                             </div>
                         </div>
                     </div>
@@ -506,7 +508,7 @@
             
             <div class="mt-24 md:mt-40 p-10 md:p-14 border border-white/10 rounded-sm bg-white/5 backdrop-blur-sm reveal max-w-4xl mx-auto text-center">
                 <p class="text-xl md:text-2xl font-light leading-relaxed italic text-balance">
-                    "No legal jargon. No theory. Just <span class="text-white font-bold not-italic">brand protection</span> that founders actually need."
+                    "No legal jargon. No theory. <br class="hidden md:block">Just <span class="text-white font-bold not-italic">brand protection</span> that founders actually need."
                 </p>
             </div>
         </div>
@@ -647,6 +649,58 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Advisory Section - Profile Integrated Layout -->
+            <div class="mt-16 md:mt-24 reveal max-w-5xl mx-auto border-t border-white/10 pt-16">
+                <div class="mb-10 text-center md:text-left">
+                    <p class="text-[10px] font-black text-[#40EADB] uppercase tracking-[0.5em]">This workshop is advised by</p>
+                </div>
+                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+                    <div class="relative group shrink-0">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-[#40EADB]/20 to-transparent rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                        <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border border-white/10 relative grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl">
+                             <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770451145/1710957296193_zss2ry.jpg" 
+                                  alt="Vishal Panjwani" 
+                                  class="w-full h-full object-cover">
+                             <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                        </div>
+                    </div>
+                    <div class="flex-1 text-center md:text-left">
+                        <h4 class="text-3xl md:text-5xl font-extrabold text-white uppercase tracking-tighter mb-2 leading-none">Vishal Panjwani</h4>
+                        <p class="text-slate-400 text-xs md:text-sm font-bold uppercase tracking-widest mb-8">CS, Trademark Expert & Legal Advisor</p>
+                        
+                        <p class="text-slate-500 font-light italic text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
+                            "This workshop is strategically designed to provide founders with a clear roadmap for safeguarding their brand's intellectual equity."
+                        </p>
+
+                        <div class="flex justify-center md:justify-start gap-8">
+                            <a href="https://www.instagram.com/weshallmusic" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="Instagram">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/csvishalpanjwani/" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="LinkedIn">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Section -->
+    <section id="investment" class="section-padding bg-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 text-center reveal">
+            <p class="micro-text text-slate-400 mb-6 uppercase font-bold text-[10px] tracking-[0.4em]">One-Time Investment</p>
+            <h2 class="text-6xl md:text-8xl font-black text-black uppercase leading-none tracking-tighter mb-8">₹1999/-</h2>
+            <div class="max-w-xl mx-auto space-y-4">
+                <div class="inline-block px-6 py-2 border-2 border-black rounded-sm bg-black text-white mb-6">
+                    <p class="text-xs font-bold uppercase tracking-widest leading-none">Seat subject to confirmation</p>
+                </div>
+                <p class="text-slate-500 italic text-sm md:text-base leading-relaxed text-balance">
+                    Due to the high-stakes nature of this cohort, we manually review every profile.
+                    <span class="text-black font-bold block mt-2">A payment link will be shared only once your application is accepted.</span>
+                </p>
+            </div>
         </div>
     </section>
 
@@ -756,7 +810,7 @@
             };
 
             // New Web App URL integrated
-            const webAppUrl = "https://script.google.com/macros/s/AKfycbzPyUN3Ei1NNjDIoErzYZpQqXGys963hJ_zB1t1OAz9IhRndb8RMphO_rwDGXi6fQI/exec";
+            const webAppUrl = "https://script.google.com/macros/s/AKfycbxl_vp4oW9AeOEUoyBS3OOg50NZXYY1cv12z2witfQw4QaWE0RjAGyoHaToMfDcB-k/exec";
 
             // Fire request in background
             fetch(webAppUrl, {
