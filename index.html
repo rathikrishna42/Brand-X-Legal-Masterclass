@@ -122,7 +122,7 @@
         .glass-card {
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
         .facilitator-block {
@@ -246,14 +246,8 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5 ml-1">Monthly Revenue Range</label>
-                        <select required class="input-field appearance-none bg-white">
-                            <option value="" disabled selected>Select range</option>
-                            <option value="pre-revenue">Pre-revenue</option>
-                            <option value="0-5L">₹0 - ₹5L</option>
-                            <option value="5-20L">₹5L - ₹20L</option>
-                            <option value="20L+">₹20L+</option>
-                        </select>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5 ml-1">Annual Revenue (Approx.)</label>
+                        <input type="text" required class="input-field" placeholder="e.g. ₹50L">
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5 ml-1">Stage</label>
@@ -302,13 +296,13 @@
 
     <!-- Hero Section -->
     <section class="relative pt-32 pb-24 overflow-hidden min-h-[90vh] md:min-h-screen flex flex-col items-center justify-center hero-section-base hero-bg-animated">
-        <!-- Background Image Container: Positioned on the LEFT as requested, with layout preserved -->
-        <div class="absolute inset-y-0 left-0 z-0 w-1/2 pointer-events-none overflow-hidden">
+        <!-- Background Image Container: Synchronized layout for both mobile and desktop (w-1/2 and right-0) -->
+        <div class="absolute inset-y-0 right-0 z-0 w-1/2 pointer-events-none overflow-hidden">
             <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" 
                  alt="Background" 
                  class="w-full h-full object-cover grayscale brightness-100 contrast-125 object-center opacity-100 md:opacity-90 transition-all duration-1000">
-            <!-- Reversed gradient (to-left) to fade into the content area from the image -->
-            <div class="absolute inset-0 bg-gradient-to-l from-black via-black/60 to-transparent"></div>
+            <!-- Fade to black to ensure text legibility -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
         </div>
         
         <div class="ambient-light-sweep"></div>
@@ -578,7 +572,7 @@
                             <p class="text-lg font-medium text-slate-500 leading-tight">You don't plan to scale seriously.</p>
                         </li>
                         <li class="flex items-start gap-5 group">
-                            <span class="text-slate-300 text-lg font-black leading-none mt-1">✕</span>
+                            <span class="text-slate-300 text-lg font-black text-slate-500 leading-none mt-1">✕</span>
                             <p class="text-lg font-medium text-slate-500 leading-tight">You're looking for generic IP awareness.</p>
                         </li>
                     </ul>
@@ -595,92 +589,122 @@
                 <p class="mt-6 text-slate-400 italic text-lg max-w-2xl mx-auto leading-relaxed text-balance">The difference between building a brand and truly owning one.</p>
             </div>
 
-            <div class="facilitator-block reveal">
-                <div class="speaker-info-card">
-                    <div class="profile-image-wrapper mb-10 group shadow-2xl">
-                        <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" alt="Krishna Rathi" class="parallax-img profile-trigger">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+            <div class="max-w-5xl mx-auto">
+                <!-- LED BY Heading: Professionally positioned and aligned with the profile card -->
+                <div class="mb-10 text-center md:text-left reveal">
+                    <p class="text-[10px] font-black text-[#40EADB] uppercase tracking-[0.5em]">THIS WORKSHOP IS LED BY</p>
+                </div>
+
+                <div class="facilitator-block reveal">
+                    <div class="speaker-info-card">
+                        <div class="profile-image-wrapper mb-10 group shadow-2xl">
+                            <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" alt="Krishna Rathi" class="parallax-img profile-trigger">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-extrabold uppercase mb-2 leading-none tracking-tighter">Krishna Rathi</h3>
+                        <p class="text-brand-teal text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-4">Brand Strategist • Lawyer</p>
+                        <!-- Facilitator Socials -->
+                        <div class="flex gap-6 mb-10">
+                            <a href="https://x.com/rathikrishna42?s=11" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="X">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            </a>
+                            <a href="https://www.instagram.com/rathikrishna42/" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="Instagram">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/rathikrishna42/" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="LinkedIn">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                            </a>
+                        </div>
+                        <!-- Updated Bio Section with pointers aesthetically positioned -->
+                        <div class="text-slate-400 font-light leading-relaxed mb-8 border-l border-white/10 pl-6 text-base md:text-lg">
+                            <p class="mb-6">This workshop is led by <span class="text-white font-bold">Krishna Rathi</span> a branding strategist with a decade of experience building, scaling, and protecting brands across industries.</p>
+                            <p class="mb-4">Krishna has worked on 2,000+ brand concepts, advising founders on:</p>
+                            <ul class="space-y-3 opacity-90 pl-2">
+                                <li class="flex items-start gap-4 transition-transform hover:translate-x-1 duration-300">
+                                    <span class="mt-2.5 w-1.5 h-1.5 bg-[#40EADB] rounded-full shadow-[0_0_8px_rgba(64,234,217,0.6)] shrink-0"></span>
+                                    <span>Brand architecture</span>
+                                </li>
+                                <li class="flex items-start gap-4 transition-transform hover:translate-x-1 duration-300">
+                                    <span class="mt-2.5 w-1.5 h-1.5 bg-[#40EADB] rounded-full shadow-[0_0_8px_rgba(64,234,217,0.6)] shrink-0"></span>
+                                    <span>Naming strategy</span>
+                                </li>
+                                <li class="flex items-start gap-4 transition-transform hover:translate-x-1 duration-300">
+                                    <span class="mt-2.5 w-1.5 h-1.5 bg-[#40EADB] rounded-full shadow-[0_0_8px_rgba(64,234,217,0.6)] shrink-0"></span>
+                                    <span>Scale-ready identity systems</span>
+                                </li>
+                                <li class="flex items-start gap-4 transition-transform hover:translate-x-1 duration-300">
+                                    <span class="mt-2.5 w-1.5 h-1.5 bg-[#40EADB] rounded-full shadow-[0_0_8px_rgba(64,234,217,0.6)] shrink-0"></span>
+                                    <span>Long-term brand equity</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <h3 class="text-3xl md:text-4xl font-extrabold uppercase mb-2 leading-none tracking-tighter">Krishna Rathi</h3>
-                    <p class="text-brand-teal text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-4">Brand Strategist • Lawyer</p>
-                    <!-- Facilitator Socials -->
-                    <div class="flex gap-6 mb-10">
-                        <a href="https://x.com/rathikrishna42?s=11" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="X">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        </a>
-                        <a href="https://www.instagram.com/rathikrishna42/" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="Instagram">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                        </a>
-                        <a href="https://www.linkedin.com/in/rathikrishna42/" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="LinkedIn">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                        </a>
+                    <div class="outcome-info-card flex flex-col justify-center">
+                        <h4 class="text-xl font-bold uppercase tracking-tighter mb-12 border-b border-white/10 pb-4">The Promise</h4>
+                        <div class="space-y-12">
+                            <div class="flex gap-8 group">
+                                <span class="text-brand-teal font-black text-3xl opacity-40 group-hover:opacity-100 transition-opacity">01</span>
+                                <div>
+                                    <p class="font-bold text-white uppercase text-xs tracking-widest mb-2">No Certificates</p>
+                                    <p class="text-slate-400 text-sm md:text-base leading-relaxed">You won't leave with paper. You'll leave with <span class="text-white font-medium">control</span>.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-8 group">
+                                <span class="text-brand-teal font-black text-3xl opacity-40 group-hover:opacity-100 transition-opacity">02</span>
+                                <div>
+                                    <p class="font-bold text-white uppercase text-xs tracking-widest mb-2">Absolute Clarity</p>
+                                    <p class="text-slate-400 text-sm md:text-base leading-relaxed">Total insight into what's protected, what's exposed, and what to fix now.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-8 group">
+                                <span class="text-brand-teal font-black text-3xl opacity-40 group-hover:opacity-100 transition-opacity">03</span>
+                                <div>
+                                    <p class="font-bold text-white uppercase text-xs tracking-widest mb-2">Strategic Defense</p>
+                                    <p class="text-slate-400 text-sm md:text-base leading-relaxed">Equipping your brand for future funding rounds and acquisitions.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p class="text-slate-400 font-light leading-relaxed mb-8 border-l border-white/10 pl-6 italic text-base md:text-lg">
-                        Over 2,000 brand concepts built.<br>
-                        Ten years safeguarding founder equity.<br><br>
-                        Led by Krishna Rathi - Brand Strategist & Lawyer.<br>
-                        Not legal theory.<br>
-                        Strategic protection for long-term brand value.
+                </div>
+
+                <!-- Message Section -->
+                <div class="mt-16 text-center reveal max-w-4xl mx-auto px-6">
+                    <p class="text-lg md:text-xl font-light text-slate-400 italic leading-relaxed text-balance">
+                        "I’ve seen brands lose years of work not because they failed, but because they didn’t legally own what they built."
                     </p>
                 </div>
-                <div class="outcome-info-card flex flex-col justify-center">
-                    <h4 class="text-xl font-bold uppercase tracking-tighter mb-12 border-b border-white/10 pb-4">The Promise</h4>
-                    <div class="space-y-12">
-                        <div class="flex gap-8 group">
-                            <span class="text-brand-teal font-black text-3xl opacity-40 group-hover:opacity-100 transition-opacity">01</span>
-                            <div>
-                                <p class="font-bold text-white uppercase text-xs tracking-widest mb-2">No Certificates</p>
-                                <p class="text-slate-400 text-sm md:text-base leading-relaxed">You won't leave with paper. You'll leave with <span class="text-white font-medium">control</span>.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-8 group">
-                            <span class="text-brand-teal font-black text-3xl opacity-40 group-hover:opacity-100 transition-opacity">02</span>
-                            <div>
-                                <p class="font-bold text-white uppercase text-xs tracking-widest mb-2">Absolute Clarity</p>
-                                <p class="text-slate-400 text-sm md:text-base leading-relaxed">Total insight into what's protected, what's exposed, and what to fix now.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-8 group">
-                            <span class="text-brand-teal font-black text-3xl opacity-40 group-hover:opacity-100 transition-opacity">03</span>
-                            <div>
-                                <p class="font-bold text-white uppercase text-xs tracking-widest mb-2">Strategic Defense</p>
-                                <p class="text-slate-400 text-sm md:text-base leading-relaxed">Equipping your brand for future funding rounds and acquisitions.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Advisory Section - Profile Integrated Layout -->
-            <div class="mt-16 md:mt-24 reveal max-w-5xl mx-auto border-t border-white/10 pt-16">
-                <div class="mb-10 text-center md:text-left">
-                    <p class="text-[10px] font-black text-[#40EADB] uppercase tracking-[0.5em]">This workshop is advised by</p>
-                </div>
-                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
-                    <div class="relative group shrink-0">
-                        <div class="absolute -inset-1 bg-gradient-to-r from-[#40EADB]/20 to-transparent rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-                        <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border border-white/10 relative grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl">
-                             <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770451145/1710957296193_zss2ry.jpg" 
-                                  alt="Vishal Panjwani" 
-                                  class="w-full h-full object-cover">
-                             <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                        </div>
+                <!-- Advisory Section - Profile Integrated Layout -->
+                <div class="mt-16 md:mt-24 reveal border-t border-white/10 pt-16">
+                    <div class="mb-10 text-center md:text-left">
+                        <p class="text-[10px] font-black text-[#40EADB] uppercase tracking-[0.5em]">This workshop is advised by</p>
                     </div>
-                    <div class="flex-1 text-center md:text-left">
-                        <h4 class="text-3xl md:text-5xl font-extrabold text-white uppercase tracking-tighter mb-2 leading-none">Vishal Panjwani</h4>
-                        <p class="text-slate-400 text-xs md:text-sm font-bold uppercase tracking-widest mb-8">CS, Trademark Expert & Legal Advisor</p>
-                        
-                        <p class="text-slate-500 font-light italic text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
-                            "This workshop is strategically designed to provide founders with a clear roadmap for safeguarding their brand's intellectual equity."
-                        </p>
+                    <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+                        <div class="relative group shrink-0">
+                            <div class="absolute -inset-1 bg-gradient-to-r from-[#40EADB]/20 to-transparent rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                            <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border border-white/10 relative grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl">
+                                 <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770451145/1710957296193_zss2ry.jpg" 
+                                      alt="Vishal Panjwani" 
+                                      class="w-full h-full object-cover">
+                                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center md:text-left">
+                            <h4 class="text-3xl md:text-5xl font-extrabold text-white uppercase tracking-tighter mb-2 leading-none">Vishal Panjwani</h4>
+                            <p class="text-slate-400 text-xs md:text-sm font-bold uppercase tracking-widest mb-8">CS, Trademark Expert & Legal Advisor</p>
+                            
+                            <p class="text-slate-500 font-light italic text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
+                                "This workshop is strategically designed to provide founders with a clear roadmap for safeguarding their brand's intellectual equity."
+                            </p>
 
-                        <div class="flex justify-center md:justify-start gap-8">
-                            <a href="https://www.instagram.com/weshallmusic" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="Instagram">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                            </a>
-                            <a href="https://www.linkedin.com/in/csvishalpanjwani/" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="LinkedIn">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                            </a>
+                            <div class="flex justify-center md:justify-start gap-8">
+                                <a href="https://www.instagram.com/weshallmusic" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="Instagram">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                                </a>
+                                <a href="https://www.linkedin.com/in/csvishalpanjwani/" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="LinkedIn">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -804,8 +828,8 @@
                 fullName: form.querySelectorAll('input')[0].value,
                 brandName: form.querySelectorAll('input')[1].value,
                 email: form.querySelectorAll('input')[2].value,
-                revenue: form.querySelectorAll('select')[0].value,
-                stage: form.querySelectorAll('select')[1].value,
+                revenue: form.querySelectorAll('input')[3].value, // Updated to match new input index
+                stage: form.querySelectorAll('select')[0].value,  // Updated to match new select index
                 concern: form.querySelectorAll('textarea')[0].value,
                 whyNow: form.querySelectorAll('textarea')[1].value
             };
