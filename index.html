@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brand Vigilance Workshop | Krishna Rathi</title>
+    <title>Build Brands Legally | Krishna Rathi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-neutral: #f4f4f2;
@@ -16,18 +14,23 @@
             --brand-teal: #40EADB;
             --paper-bg: #fcfbf9;
             --border-subtle: rgba(0,0,0,0.08);
+            --font-serif: 'Times New Roman', Times, serif;
         }
+        
+        * {
+            font-family: var(--font-serif) !important;
+        }
+
+        .font-caveat {
+            font-family: 'Caveat', cursive !important;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
             background-color: var(--bg-neutral);
             color: var(--text-main);
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
             position: relative;
-        }
-
-        .font-typewriter {
-            font-family: 'Courier Prime', monospace;
         }
 
         #canvas-container {
@@ -62,6 +65,15 @@
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+        @keyframes imageZoom {
+            0% { transform: scale(1.0); }
+            100% { transform: scale(1.15); }
+        }
+
+        .hero-img-anim {
+            animation: imageZoom 20s ease-in-out infinite alternate;
         }
 
         .reveal {
@@ -103,18 +115,13 @@
         .input-field {
             width: 100%; padding: 14px; border: 1px solid #e2e8f0; border-radius: 2px;
             font-size: 14px; transition: border-color 0.3s; background: #fafafa;
-            font-family: 'Inter', sans-serif;
         }
         .input-field:focus { border-color: black; outline: none; background: #fff; }
         
         .profile-img-wrap {
             position: relative;
             overflow: hidden;
-            filter: grayscale(100%);
-            transition: filter 0.8s ease;
-        }
-        .profile-img-wrap:hover {
-            filter: grayscale(0%);
+            transition: transform 0.4s ease;
         }
 
         /* Reduced paragraph spacing for a tighter letter flow */
@@ -122,11 +129,16 @@
         .typewriter-text ul { margin-bottom: 0.875rem; }
     </style>
 </head>
-<body class="selection:bg-black selection:text-white">
+<body class="selection:bg-black selection:text-white relative">
 
     <div id="canvas-container"></div>
     <div class="bg-animate"></div>
     <div class="bg-grid"></div>
+
+    <!-- Floating Apply Button (Fixed for Mobile Visibility) -->
+    <button onclick="openEnquiryModal()" style="z-index: 9999;" class="cta-primary fixed bottom-6 right-4 sm:bottom-8 sm:right-8 px-5 py-3 md:px-6 md:py-4 rounded-full font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] shadow-2xl border border-white/20 flex items-center justify-center">
+        Apply for Seat
+    </button>
 
     <!-- Enquiry Modal -->
     <div id="enquiry-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm" onclick="closeEnquiryModal(event)">
@@ -136,8 +148,8 @@
             </button>
             <div class="mb-10 border-b border-slate-100 pb-6">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Application</p>
-                <h2 class="text-3xl font-extrabold tracking-tight text-black uppercase leading-none">Apply for the Table</h2>
-                <p class="text-sm text-slate-500 mt-3">A curated cohort for founders securing their brand assets.</p>
+                <h2 class="text-3xl font-bold tracking-tight text-black uppercase leading-none">Apply for the Table</h2>
+                <p class="text-sm text-slate-500 mt-3 italic">A curated cohort for founders securing their brand assets.</p>
             </div>
             <form id="requestForm" onsubmit="handleRequestSubmit(event)" class="space-y-5">
                 <div>
@@ -178,53 +190,55 @@
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
                 </div>
                 <h3 class="text-2xl font-bold text-black mb-2 uppercase tracking-tight">Application Logged</h3>
-                <p class="text-slate-500">Your profile has been submitted for review. Expect communication within 24 hours.</p>
+                <p class="text-slate-500 italic">Your profile has been submitted for review. Expect communication within 24 hours.</p>
             </div>
         </div>
     </div>
 
-    <!-- Nav -->
-    <nav class="fixed w-full top-0 left-0 z-50 bg-[#f4f4f2]/90 backdrop-blur-xl border-b border-soft">
-        <div class="max-w-5xl mx-auto px-6 h-[72px] flex items-center justify-between">
-            <div class="flex items-center gap-3 shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
-                <div class="w-6 h-6 bg-black flex items-center justify-center"><span class="text-white text-[9px] font-bold">X</span></div>
-                <span class="font-extrabold text-[10px] md:text-xs tracking-[0.2em] uppercase text-black">Brand Vigilance Workshop</span>
-            </div>
-            <div class="flex items-center gap-8">
-                <a href="#details" class="hidden md:block text-[10px] font-bold text-slate-500 hover:text-black tracking-[0.15em] uppercase transition-colors">Logistics</a>
-                <button onclick="openEnquiryModal()" class="cta-primary text-white text-[9px] md:text-[10px] font-bold px-5 py-2.5 rounded-sm uppercase tracking-[0.2em]">Apply Now</button>
+    <!-- Full Screen Animated Hero Section -->
+    <header class="relative w-full h-[100vh] min-h-[600px] flex flex-col items-center justify-center overflow-hidden z-10">
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" alt="Krishna Rathi" class="w-full h-full object-cover object-[center_30%] hero-img-anim grayscale opacity-[0.35]">
+            <!-- Elegant fade transition to the background color -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#f4f4f2]/60 to-[#f4f4f2]"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 flex flex-col items-center reveal active">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-normal uppercase tracking-[0.25em] text-slate-900 mb-8 drop-shadow-sm">BUILD BRANDS LEGALLY</h1>
+            <div class="flex flex-col items-center justify-center mt-2">
+                <span class="text-[10px] md:text-xs uppercase tracking-[0.2em] text-slate-600 mb-1">A workshop by</span>
+                <span class="font-caveat text-3xl md:text-4xl lg:text-5xl text-slate-900 relative z-10 inline-block transform -rotate-2">
+                    Krishna Rathi
+                    <span class="absolute bottom-1 left-0 w-full h-2 md:h-3 bg-[#40EADB] opacity-50 -z-10 rounded-sm"></span>
+                </span>
             </div>
         </div>
-    </nav>
+
+        <div class="absolute bottom-12 z-10 animate-bounce flex flex-col items-center opacity-60">
+            <p class="text-[10px] uppercase tracking-widest font-bold mb-2 text-slate-600">Scroll to Read</p>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-slate-600"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        </div>
+    </header>
 
     <!-- Page 1: The Letter Section -->
-    <section class="pt-32 md:pt-40 pb-12 px-4 md:px-6 relative z-10 flex flex-col items-center">
-        
-        <!-- Minimal Workshop Title Above Letter -->
-        <div class="mb-8 text-center reveal flex flex-col items-center">
-            <h1 class="text-xl md:text-2xl font-light tracking-[0.2em] uppercase text-slate-800 mb-3">Brand Vigilance Workshop</h1>
-            <div class="px-5 py-1.5 border border-slate-200 rounded-full bg-white shadow-sm">
-                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-slate-500">By Krishna Rathi</p>
-            </div>
-        </div>
-
+    <section class="pt-12 pb-12 px-4 md:px-6 relative z-10 flex flex-col items-center">
         <!-- The Document -->
         <div class="letter-paper w-full max-w-[800px] mx-auto p-8 md:p-14 lg:p-16 reveal text-left">
 
-            <div class="font-typewriter text-[15px] md:text-[16px] leading-[1.7] text-slate-800 typewriter-text">
+            <div class="text-[15px] md:text-[16px] leading-[1.7] text-slate-800 typewriter-text">
                 
-                <p class="mb-8">Dear Founders,</p>
+                <p class="mb-8">Dear Founder,</p>
 
-                <p>I know you’ve already built a brand.</p>
+                <p>I know you already understand how to build a brand</p>
                 
-                <p>It looks right.<br>Logo, packaging, story—all in place.</p>
+                <p>You know<br>Logo, Packaging, Story all in one place</p>
                 
                 <p>But let me say this to you directly.</p>
                 
                 <p>What you’re calling “building a brand”...<br>I’ve seen founders do the same and still lose it.</p>
 
                 <div class="my-8 py-5 px-6 border-l-[3px] border-slate-300 bg-slate-50/50 text-sm md:text-[15px] text-slate-600">
-                    <p class="!mb-3">— A founder who built a strong hospitality brand like <strong>StayZilla</strong>, but couldn’t hold it when things turned.</p>
+                    <p class="!mb-3">— The dairy giant <strong>Amul</strong> stopping the innerwear brand <strong>Amul Macho</strong>, proving well-known trademarks protect your reputation everywhere.</p>
                     <p class="!mb-3">— Founders behind <strong>Paper Boat</strong>, who had to deal with trademark conflicts even after building recall.</p>
                     <p class="!mb-0">— Even a company like <strong>Cognizant</strong>, facing trademark restrictions in certain markets despite its scale.</p>
                 </div>
@@ -234,13 +248,13 @@
                 <p>And that’s the gap.</p>
                 
                 <p>You’re not just building perception.<br>
-                <strong class="font-bold text-slate-900 text-xl md:text-2xl mt-1 block">You’re building an asset.</strong></p>
+                <strong class="font-bold text-slate-900">You’re building an asset.</strong></p>
                 
                 <p>If you don’t own it cleanly,<br>it’s not an asset.</p>
                 
-                <p class="bg-slate-100 text-slate-900 inline-block px-3 py-1 font-bold mt-2 border border-slate-200">It’s a risk sitting inside your business.</p>
+                <p class="font-bold text-slate-900">It’s a risk sitting inside your business.</p>
                 
-                <div class="text-center my-10 text-slate-300 font-sans tracking-widest">
+                <div class="text-center my-10 text-slate-300 tracking-widest">
                     • • •
                 </div>
 
@@ -259,7 +273,7 @@
                 <p>This is where most founders realise things late.<br>
                 <strong class="font-bold text-slate-900 border-b border-slate-300 pb-0.5">And fixing it later is always expensive.</strong></p>
 
-                <div class="text-center my-10 text-slate-300 font-sans tracking-widest">
+                <div class="text-center my-10 text-slate-300 tracking-widest">
                     • • •
                 </div>
 
@@ -268,8 +282,8 @@
                 <p>If you’re serious about building something you actually own,<br>you can apply.</p>
 
                 <!-- Signature Block -->
-                <div class="mt-12 pt-8 border-t border-slate-200 font-sans flex flex-col items-start w-full">
-                    <p class="font-sans font-bold text-[15px] md:text-[16px] text-slate-800">- Krishna Rathi</p>
+                <div class="mt-12 pt-8 border-t border-slate-200 flex flex-col items-start w-full">
+                    <p class="font-bold text-[15px] md:text-[16px] text-slate-800">— Krishna Rathi</p>
                 </div>
 
             </div>
@@ -277,35 +291,36 @@
     </section>
 
     <!-- Page 2: Details & Profiles Section (The Attachment) -->
-    <section id="details" class="pb-32 px-4 md:px-6 relative z-10 flex flex-col items-center font-sans">
+    <section id="details" class="pb-32 px-4 md:px-6 relative z-10 flex flex-col items-center">
         
         <div class="letter-paper w-full max-w-[800px] mx-auto p-8 md:p-14 lg:p-16 reveal text-left border-t-0 border-t-transparent shadow-sm">
             
             <div class="border-b border-slate-200 pb-6 mb-10">
-                <h2 class="font-typewriter text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Workshop Logistics & Facilitators</h2>
+                <h2 class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Workshop Logistics & Facilitators</h2>
             </div>
 
-            <div class="font-typewriter text-slate-800">
+            <div class="text-slate-800">
                 
                 <!-- Logistics Data -->
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 border-b border-slate-200 pb-12">
                     
                     <div class="flex flex-col">
-                        <p class="text-[10px] font-sans font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Schedule</p>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Schedule</p>
                         <p class="font-bold text-slate-900 text-base md:text-lg mb-1">Sun, 12 Apr 2026</p>
                         <p class="text-xs md:text-sm text-slate-600">11:00 AM — 2:00 PM (IST)</p>
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-[10px] font-sans font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Format</p>
-                        <p class="font-bold text-slate-900 text-base md:text-lg mb-1">3-Hour Session</p>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Format</p>
+                        <p class="font-bold text-slate-900 text-base md:text-lg mb-1">3-Hour Online Session</p>
                         <p class="text-xs md:text-sm text-slate-600">Live, closed Zoom room</p>
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-[10px] font-sans font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Investment</p>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Fees</p>
                         <p class="font-bold text-slate-900 text-base md:text-lg mb-1">₹1999/-</p>
-                        <p class="text-xs md:text-sm text-slate-600">Strictly 30 seats</p>
+                        <p class="text-[10px] text-slate-500 mt-1 italic">GST will be charged additional as applicable</p>
+                        <p class="text-xs md:text-sm text-slate-600 mt-1">Strictly 30 seats</p>
                     </div>
 
                 </div>
@@ -319,18 +334,21 @@
                             <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" alt="Krishna Rathi" class="w-full h-full object-cover rounded-full">
                         </div>
                         <div class="flex-1">
-                            <p class="text-[10px] font-sans font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Led By</p>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Led By</p>
                             <h4 class="text-lg md:text-xl font-bold text-slate-900 mb-1">Krishna Rathi</h4>
-                            <p class="text-[11px] md:text-xs font-sans text-slate-500 uppercase tracking-widest mb-3">Brand Strategist • Lawyer</p>
+                            <p class="text-[11px] md:text-xs text-slate-500 uppercase tracking-widest mb-3">Brand Strategist • Lawyer</p>
                             
                             <p class="text-xs md:text-sm leading-relaxed text-slate-600 mb-4">
                                 A branding strategist with a decade of experience building, scaling, and protecting brands. Krishna has worked on 2,000+ brand concepts, advising founders on long-term brand equity and scale-ready identity systems.
                             </p>
 
                             <div class="flex gap-4">
-                                <a href="https://x.com/rathikrishna42?s=11" target="_blank" class="text-slate-400 hover:text-slate-800 transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                                <!-- Instagram First -->
                                 <a href="https://www.instagram.com/rathikrishna42/" target="_blank" class="text-slate-400 hover:text-slate-800 transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                                <!-- LinkedIn Second -->
                                 <a href="https://www.linkedin.com/in/rathikrishna42/" target="_blank" class="text-slate-400 hover:text-slate-800 transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+                                <!-- X Last -->
+                                <a href="https://x.com/rathikrishna42?s=11" target="_blank" class="text-slate-400 hover:text-slate-800 transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
                             </div>
                         </div>
                     </div>
@@ -341,12 +359,12 @@
                             <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770451145/1710957296193_zss2ry.jpg" alt="Vishal Panjwani" class="w-full h-full object-cover rounded-full">
                         </div>
                         <div class="flex-1">
-                            <p class="text-[10px] font-sans font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Advised By</p>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Advised By</p>
                             <h4 class="text-lg md:text-xl font-bold text-slate-900 mb-1">Vishal Panjwani</h4>
-                            <p class="text-[11px] md:text-xs font-sans text-slate-500 uppercase tracking-widest mb-3">CS, Trademark Expert</p>
+                            <p class="text-[11px] md:text-xs text-slate-500 uppercase tracking-widest mb-3">CS, Trademark Expert</p>
                             
-                            <p class="text-xs md:text-sm leading-relaxed text-slate-600 mb-4 italic">
-                                "This workshop is strategically designed to provide founders with a clear roadmap for safeguarding their brand's intellectual equity."
+                            <p class="text-xs md:text-sm leading-relaxed text-slate-600 mb-4">
+                                An experienced Company Secretary and Trademark Expert dedicated to helping founders secure their intellectual property and brand assets.
                             </p>
 
                             <div class="flex gap-4">
@@ -358,12 +376,9 @@
                 </div>
 
                 <!-- Application Block Moved Here -->
-                <div class="mt-16 pt-10 border-t border-slate-200 font-sans flex flex-col items-start w-full">
-                    <button onclick="openEnquiryModal()" class="cta-primary px-8 py-3.5 rounded-sm font-bold text-xs uppercase tracking-[0.2em] w-full sm:w-auto text-center border-none mb-5">
-                        Apply for a Seat →
-                    </button>
+                <div class="mt-16 pt-10 border-t border-slate-200 flex flex-col items-start w-full">
                     <div class="flex flex-col gap-1.5 border-l-2 border-[#40EADB] pl-4">
-                        <p class="text-[11px] text-slate-500 font-medium tracking-wide">Due to the high-stakes nature of this cohort, we manually review every profile.</p>
+                        <p class="text-[11px] text-slate-500 font-medium tracking-wide">As we have limited seats for the workshop, we manually review every profile.</p>
                         <p class="text-[11px] text-slate-500 font-medium tracking-wide">A payment link will be shared only once your application is accepted.</p>
                     </div>
                 </div>
@@ -373,11 +388,11 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-soft bg-[#f4f4f2] font-sans">
+    <footer class="py-12 border-t border-soft bg-[#f4f4f2]">
         <div class="max-w-5xl mx-auto px-6 flex flex-col items-center justify-center gap-6 text-center">
             <div class="flex items-center gap-3 opacity-40">
                 <div class="w-5 h-5 bg-black flex items-center justify-center"><span class="text-white text-[7px] font-bold">X</span></div>
-                <span class="font-bold text-[9px] tracking-[0.2em] uppercase text-black">Brand Vigilance</span>
+                <span class="font-bold text-[9px] tracking-[0.2em] uppercase text-black">Build Brands Legally</span>
             </div>
             <p class="text-[9px] text-slate-400 uppercase tracking-widest font-bold">&copy; 2026 Krishna Rathi.</p>
         </div>
