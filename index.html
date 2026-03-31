@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Build Brands Legally | Krishna Rathi</title>
+    <title>Brand Vigilance Workshop | Krishna Rathi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-neutral: #f9fafb;
-            --text-main: #111827;
-            --text-muted: #4b5563;
-            --accent: #374151;
-            --border-soft: rgba(0,0,0,0.06);
+            --bg-neutral: #f4f4f2;
+            --text-main: #0a0a0a;
             --brand-teal: #40EADB;
+            --paper-bg: #fcfbf9;
+            --border-subtle: rgba(0,0,0,0.08);
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -25,6 +24,10 @@
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
             position: relative;
+        }
+
+        .font-typewriter {
+            font-family: 'Courier Prime', monospace;
         }
 
         #canvas-container {
@@ -38,9 +41,20 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2;
-            background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(243,244,246,0.4) 50%, rgba(229,231,235,0.2) 100%);
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(244,244,242,0.95) 50%, rgba(229,231,235,0.6) 100%);
             background-size: 400% 400%;
-            animation: silkShift 15s ease infinite;
+            animation: silkShift 20s ease infinite;
+            pointer-events: none;
+        }
+
+        /* Subtle grid background for the premium corporate feel */
+        .bg-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background-image: linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.3;
             pointer-events: none;
         }
 
@@ -50,753 +64,332 @@
             100% { background-position: 0% 50%; }
         }
 
-        .hero-section-base { background: #000000; position: relative; }
-
-        @keyframes heroGradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        /* Refined for better theme merging with B&W image */
-        .hero-bg-animated {
-            background: linear-gradient(-45deg, #000000, #050505, #0a0a0a, #000000);
-            background-size: 400% 400%;
-            animation: heroGradientMove 8s ease-in-out infinite;
-        }
-
-        .grain-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; opacity: 0.04; pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        .hero-heading { font-size: clamp(32px, 7vw, 64px); letter-spacing: -0.02em; line-height: 1.1; }
-        .section-heading { font-size: clamp(28px, 5vw, 42px); letter-spacing: -0.01em; }
-        .micro-text { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
-        
-        .scribble-highlight { font-family: 'Caveat', cursive; }
-
         .reveal {
-            opacity: 0; transform: translateY(30px);
+            opacity: 0; transform: translateY(20px);
             transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        @keyframes cta-glow {
-            0% { box-shadow: 0 0 0 0 rgba(64, 234, 219, 0.1); }
-            50% { box-shadow: 0 0 20px 2px rgba(64, 234, 219, 0.05); }
-            100% { box-shadow: 0 0 0 0 rgba(64, 234, 219, 0.1); }
+        .letter-paper {
+            background: var(--paper-bg);
+            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.05), 0 0 0 1px rgba(0,0,0,0.03);
+            position: relative;
+            border-top: 6px solid #000;
         }
 
         .cta-primary {
-            background-color: #0c121e;
+            background-color: #000;
             color: #ffffff;
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             border: 1px solid rgba(255,255,255,0.1);
-            animation: cta-glow 4s infinite ease-in-out;
             cursor: pointer;
         }
-
         .cta-primary:hover {
-            background-color: #000;
-            transform: translateY(-4px);
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3);
-        }
-
-        .profile-image-wrapper {
-            width: 100%; max-width: 380px; aspect-ratio: 4/5;
-            background: #0a0a0a; border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 4px; overflow: hidden; position: relative;
-        }
-        .parallax-img {
-            width: 100%; height: 110%; object-fit: cover;
-            filter: grayscale(100%);
-            transform: translateY(var(--img-parallax, 0%));
-            transition: filter 1.2s ease, transform 0.1s linear;
-        }
-        .parallax-img.revealed { filter: grayscale(0%); }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.4);
-        }
-
-        .facilitator-block {
-            background: #111111; border-radius: 12px; overflow: hidden;
-            display: grid; grid-template-columns: 1fr;
-            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        @media (min-width: 1024px) { .facilitator-block { grid-template-columns: 1.15fr 1fr; } }
-
-        .speaker-info-card { background: #000; padding: clamp(32px, 6vw, 64px); }
-        .outcome-info-card { background: #0a0a0a; padding: clamp(32px, 6vw, 64px); border-left: 1px solid rgba(255,255,255,0.05); }
-
-        /* Audience Grid Cards - Refined for New Layout */
-        .audience-column {
-            padding: clamp(40px, 8vw, 80px);
-            transition: all 0.4s ease;
+            background-color: #111;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.4);
         }
 
         .modal-container {
             background: #ffffff; width: 92%; max-width: 520px;
-            padding: clamp(24px, 6vw, 48px); border-radius: 8px;
+            padding: clamp(24px, 6vw, 48px); border-radius: 4px;
             position: relative; transform: translateY(20px); opacity: 0;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); margin: auto;
         }
         #enquiry-modal.active .modal-container { transform: translateY(0); opacity: 1; }
 
-        .pillar-progress-line {
-            position: absolute; left: -1.5px; top: 0; width: 4px; height: 150px;
-            background: var(--brand-teal); border-radius: 999px;
-            box-shadow: 0 0 20px var(--brand-teal);
-            transform: translateY(var(--pillar-y, 0)); transition: transform 0.1s linear;
-        }
-
         .input-field {
-            width: 100%; padding: 14px; border: 1px solid #e2e8f0; border-radius: 4px;
-            font-size: 14px; transition: border-color 0.3s; background: #fff;
+            width: 100%; padding: 14px; border: 1px solid #e2e8f0; border-radius: 2px;
+            font-size: 14px; transition: border-color 0.3s; background: #fafafa;
+            font-family: 'Inter', sans-serif;
         }
-        .input-field:focus { border-color: black; outline: none; }
-
-        .section-padding {
-            padding-top: clamp(80px, 12vh, 160px);
-            padding-bottom: clamp(80px, 12vh, 160px);
-        }
-
-        /* Ambient light refined for better blend */
-        .ambient-light-sweep {
-            position: absolute;
-            top: -20%; left: -20%; width: 140%; height: 140%;
-            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
-            z-index: 1; pointer-events: none;
-        }
-
-        .pillar-number {
-            transition: color 0.5s ease, opacity 0.5s ease;
-        }
-        .pillar-number.active {
-            color: #ffffff;
-            opacity: 1;
-        }
-
-        /* Newspaper Styled Evidence */
-        .news-paper {
-            background: #fdfdfb;
-            color: #000;
-            border: 1px solid #ddd;
-            padding: clamp(32px, 5vw, 64px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        .input-field:focus { border-color: black; outline: none; background: #fff; }
+        
+        .profile-img-wrap {
             position: relative;
+            overflow: hidden;
+            filter: grayscale(100%);
+            transition: filter 0.8s ease;
         }
-        .news-header {
-            border-bottom: 4px double #000;
-            padding-bottom: 20px;
-            margin-bottom: 40px;
-            text-align: center;
+        .profile-img-wrap:hover {
+            filter: grayscale(0%);
         }
-        .news-headline {
-            font-family: serif;
-            font-weight: 900;
-            line-height: 1;
-            letter-spacing: -0.03em;
-            text-transform: uppercase;
-        }
-        .news-column {
-            border-right: 1px solid #eee;
-            padding-right: 24px;
-        }
-        @media (max-width: 1024px) {
-            .news-column { border-right: 0; padding-right: 0; border-bottom: 1px solid #eee; padding-bottom: 32px; }
-        }
+
+        /* Reduced paragraph spacing for a tighter letter flow */
+        .typewriter-text p { margin-bottom: 0.875rem; }
+        .typewriter-text ul { margin-bottom: 0.875rem; }
     </style>
 </head>
-<body class="selection:bg-slate-200">
+<body class="selection:bg-black selection:text-white">
 
     <div id="canvas-container"></div>
     <div class="bg-animate"></div>
-    <div class="grain-overlay"></div>
+    <div class="bg-grid"></div>
 
     <!-- Enquiry Modal -->
-    <div id="enquiry-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 backdrop-blur-xl" onclick="closeEnquiryModal(event)">
+    <div id="enquiry-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm" onclick="closeEnquiryModal(event)">
         <div class="modal-container shadow-2xl overflow-y-auto max-h-[90vh]" onclick="event.stopPropagation()">
             <button onclick="closeEnquiryModal()" class="absolute top-6 right-6 text-slate-400 hover:text-black transition-colors">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
-            <div class="mb-10">
-                <h2 class="text-3xl font-extrabold tracking-tight text-black mb-4 uppercase leading-none">Apply for the Table</h2>
-                <p class="text-sm text-slate-500 leading-relaxed text-balance">This is a curated cohort for founders who refuse to lose what they've built.</p>
+            <div class="mb-10 border-b border-slate-100 pb-6">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Application</p>
+                <h2 class="text-3xl font-extrabold tracking-tight text-black uppercase leading-none">Apply for the Table</h2>
+                <p class="text-sm text-slate-500 mt-3">A curated cohort for founders securing their brand assets.</p>
             </div>
             <form id="requestForm" onsubmit="handleRequestSubmit(event)" class="space-y-5">
                 <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5 ml-1">Full Name</label>
-                    <input type="text" required class="input-field" placeholder="John Doe">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Full Name</label>
+                    <input type="text" required class="input-field" placeholder="Enter your full name">
                 </div>
                 <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5 ml-1">Brand/Company Name</label>
-                    <input type="text" required class="input-field" placeholder="Brand Inc.">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Brand/Company Name</label>
+                    <input type="text" required class="input-field" placeholder="Enter your registered entity">
                 </div>
                 <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5 ml-1">Email ID</label>
-                    <input type="email" required class="input-field" placeholder="john@brand.com">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Official Email ID</label>
+                    <input type="email" required class="input-field" placeholder="founder@company.com">
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5 ml-1">Annual Revenue (Approx.)</label>
-                        <input type="text" required class="input-field" placeholder="e.g. ₹50L">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Annual Revenue</label>
+                        <input type="text" required class="input-field" placeholder="Approx. revenue">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5 ml-1">Stage</label>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Current Stage</label>
                         <select required class="input-field appearance-none bg-white">
-                            <option value="" disabled selected>Select stage</option>
-                            <option value="pre-launch">Pre-launch</option>
-                            <option value="early">Early Stage</option>
-                            <option value="scaling">Scaling</option>
+                            <option value="" disabled selected>Select stage...</option>
+                            <option value="pre-launch">Pre-launch / Ideation</option>
+                            <option value="early">Early Stage (Pre-Seed/Seed)</option>
+                            <option value="scaling">Scaling (Series A+)</option>
                         </select>
                     </div>
                 </div>
                 <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5 ml-1">Primary Legal Concern</label>
-                    <textarea required class="input-field min-h-[80px]" placeholder="Trademark infringement, IP ownership, etc."></textarea>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Primary Legal Concern</label>
+                    <textarea required class="input-field min-h-[80px]" placeholder="Briefly describe your immediate IP or trademark risks..."></textarea>
                 </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5 ml-1">Why now?</label>
-                    <textarea required class="input-field min-h-[80px]" placeholder="Raising a round, rebranding, current dispute?"></textarea>
-                </div>
-                <button type="submit" class="cta-primary w-full py-4 rounded-sm font-bold text-sm uppercase tracking-widest mt-4">Submit Application</button>
+                <button type="submit" class="cta-primary w-full py-4 rounded-sm font-bold text-sm uppercase tracking-widest mt-6">Submit Application</button>
             </form>
-            <div id="success-message" class="hidden text-center py-12">
-                <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div id="success-message" class="hidden text-center py-16">
+                <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-6">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
                 </div>
-                <h3 class="text-2xl font-bold text-black mb-2">Application Received</h3>
-                <p class="text-slate-500">We will review your profile and reach out within 24 hours.</p>
+                <h3 class="text-2xl font-bold text-black mb-2 uppercase tracking-tight">Application Logged</h3>
+                <p class="text-slate-500">Your profile has been submitted for review. Expect communication within 24 hours.</p>
             </div>
         </div>
     </div>
 
     <!-- Nav -->
-    <nav class="fixed w-full top-0 left-0 z-50 bg-[#f9fafb]/90 backdrop-blur-md border-b border-soft">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2 md:gap-3 shrink-0">
-                <div class="w-5 h-5 md:w-6 md:h-6 bg-black flex items-center justify-center rounded-sm"><span class="text-white text-[7px] md:text-[8px] font-bold">X</span></div>
-                <span class="font-bold text-[9px] md:text-xs tracking-widest uppercase whitespace-nowrap">BUILD BRANDS LEGALLY</span>
+    <nav class="fixed w-full top-0 left-0 z-50 bg-[#f4f4f2]/90 backdrop-blur-xl border-b border-soft">
+        <div class="max-w-5xl mx-auto px-6 h-[72px] flex items-center justify-between">
+            <div class="flex items-center gap-3 shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <div class="w-6 h-6 bg-black flex items-center justify-center"><span class="text-white text-[9px] font-bold">X</span></div>
+                <span class="font-extrabold text-[10px] md:text-xs tracking-[0.2em] uppercase text-black">Brand Vigilance Workshop</span>
             </div>
-            <div class="flex gap-4 md:gap-10 items-center">
-                <a href="#problem" class="text-[8px] md:text-[10px] font-bold text-slate-500 hover:text-black transition-colors uppercase tracking-[0.2em] whitespace-nowrap">The Problem</a>
-                <a href="#audience" class="hidden sm:inline-block text-[8px] md:text-[10px] font-bold text-slate-500 hover:text-black transition-colors uppercase tracking-[0.2em] whitespace-nowrap">Is This For You?</a>
-                <button onclick="openEnquiryModal()" class="cta-primary text-white text-[8px] md:text-[10px] font-bold px-3 md:px-6 py-2 md:py-2.5 rounded-sm uppercase tracking-[0.2em] whitespace-nowrap">Apply to Join</button>
+            <div class="flex items-center gap-8">
+                <a href="#details" class="hidden md:block text-[10px] font-bold text-slate-500 hover:text-black tracking-[0.15em] uppercase transition-colors">Logistics</a>
+                <button onclick="openEnquiryModal()" class="cta-primary text-white text-[9px] md:text-[10px] font-bold px-5 py-2.5 rounded-sm uppercase tracking-[0.2em]">Apply Now</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-24 overflow-hidden min-h-[90vh] md:min-h-screen flex flex-col items-center justify-center hero-section-base hero-bg-animated">
-        <!-- Background Image Container: Synchronized layout for both mobile and desktop (w-1/2 and right-0) -->
-        <div class="absolute inset-y-0 right-0 z-0 w-1/2 pointer-events-none overflow-hidden">
-            <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" 
-                 alt="Background" 
-                 class="w-full h-full object-cover grayscale brightness-100 contrast-125 object-center opacity-100 md:opacity-90 transition-all duration-1000">
-            <!-- Fade to black to ensure text legibility -->
-            <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
-        </div>
+    <!-- Page 1: The Letter Section -->
+    <section class="pt-32 md:pt-40 pb-12 px-4 md:px-6 relative z-10 flex flex-col items-center">
         
-        <div class="ambient-light-sweep"></div>
-        
-        <div class="max-w-5xl mx-auto px-6 text-center reveal active relative z-10 py-12">
-            <div class="mb-10 md:mb-14">
-                <div class="mb-12 inline-flex flex-col items-center">
-                    <div class="flex flex-col md:flex-row items-center">
-                        <span class="text-[11px] md:text-sm font-black tracking-[0.4em] text-white uppercase opacity-90 leading-none whitespace-nowrap mb-4 md:mb-0">BUILD BRANDS LEGALLY By</span>
-                        <span class="scribble-highlight text-3xl md:text-4xl lg:text-5xl normal-case tracking-normal md:ml-3 text-[#40EADB] align-middle">Krishna Rathi</span>
-                    </div>
-                    <!-- The accent underline from the screenshot -->
-                    <div class="w-16 h-[2px] bg-[#40EADB] mt-4 ml-0 md:ml-[-100px]"></div>
-                </div>
-                
-                <div class="mb-10">
-                    <div class="mb-8 inline-block px-5 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md">
-                        <p class="text-[9px] md:text-[10px] font-black text-white uppercase tracking-[0.3em]">Limited cohort of 30 founders only</p>
-                    </div>
-                    <h1 class="hero-heading font-extrabold text-white mb-6 md:mb-8 text-balance uppercase leading-tight">Would You Risk Hundreds of Crores?</h1>
-                    <h2 class="text-3xl md:text-5xl font-black text-[#40EADB] mb-12 uppercase tracking-tight italic drop-shadow-2xl">Of Course Not.</h2>
-                    <div class="text-base md:text-xl font-light text-slate-400 max-w-2xl mx-auto leading-relaxed italic text-balance px-4 flex flex-col gap-2">
-                        <p>Most founders obsess over logos, messaging, and growth.</p>
-                        <p>Few think about who actually <span class="text-white font-bold not-italic">owns</span> what they're building.</p>
-                        <p class="text-white font-semibold not-italic">That gap costs millions.</p>
-                    </div>
-                </div>
+        <!-- Minimal Workshop Title Above Letter -->
+        <div class="mb-8 text-center reveal flex flex-col items-center">
+            <h1 class="text-xl md:text-2xl font-light tracking-[0.2em] uppercase text-slate-800 mb-3">Brand Vigilance Workshop</h1>
+            <div class="px-5 py-1.5 border border-slate-200 rounded-full bg-white shadow-sm">
+                <p class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-slate-500">By Krishna Rathi</p>
             </div>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <button onclick="openEnquiryModal()" class="cta-primary !bg-white !text-black px-12 py-5 rounded-sm font-bold text-xs uppercase tracking-[0.2em] w-full sm:w-auto shadow-xl">Apply to Join →</button>
-                <div class="flex flex-col items-center sm:items-start sm:border-l sm:border-white/20 sm:pl-6">
-                    <p class="text-[10px] md:text-[11px] font-bold text-white uppercase tracking-widest mb-1">Sunday, 12th April 2026</p>
-                    <p class="text-[11px] md:text-xs font-extrabold text-[#40EADB] tracking-widest uppercase mb-1">11 AM Onwards</p>
-                    <p class="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em]">3-Hour Workshop</p>
+        </div>
+
+        <!-- The Document -->
+        <div class="letter-paper w-full max-w-[800px] mx-auto p-8 md:p-14 lg:p-16 reveal text-left">
+
+            <div class="font-typewriter text-[15px] md:text-[16px] leading-[1.7] text-slate-800 typewriter-text">
+                
+                <p class="mb-8">Dear Founders,</p>
+
+                <p>I know you’ve already built a brand.</p>
+                
+                <p>It looks right.<br>Logo, packaging, story—all in place.</p>
+                
+                <p>But let me say this to you directly.</p>
+                
+                <p>What you’re calling “building a brand”...<br>I’ve seen founders do the same and still lose it.</p>
+
+                <div class="my-8 py-5 px-6 border-l-[3px] border-slate-300 bg-slate-50/50 text-sm md:text-[15px] text-slate-600">
+                    <p class="!mb-3">— A founder who built a strong hospitality brand like <strong>StayZilla</strong>, but couldn’t hold it when things turned.</p>
+                    <p class="!mb-3">— Founders behind <strong>Paper Boat</strong>, who had to deal with trademark conflicts even after building recall.</p>
+                    <p class="!mb-0">— Even a company like <strong>Cognizant</strong>, facing trademark restrictions in certain markets despite its scale.</p>
                 </div>
+
+                <p>Not because they didn’t build well.<br>Because they didn’t secure what they built.</p>
+                
+                <p>And that’s the gap.</p>
+                
+                <p>You’re not just building perception.<br>
+                <strong class="font-bold text-slate-900 text-xl md:text-2xl mt-1 block">You’re building an asset.</strong></p>
+                
+                <p>If you don’t own it cleanly,<br>it’s not an asset.</p>
+                
+                <p class="bg-slate-100 text-slate-900 inline-block px-3 py-1 font-bold mt-2 border border-slate-200">It’s a risk sitting inside your business.</p>
+                
+                <div class="text-center my-10 text-slate-300 font-sans tracking-widest">
+                    • • •
+                </div>
+
+                <p>From the moment you approve your logo<br>to the point you start scaling,</p>
+                
+                <p>you need to be clear on:</p>
+                
+                <ul class="pl-0 space-y-3 mb-8 list-none">
+                    <li class="flex items-start"><span class="mr-3 text-slate-400 font-bold">[ ]</span> Is your brand actually safe, or already exposed?</li>
+                    <li class="flex items-start"><span class="mr-3 text-slate-400 font-bold">[ ]</span> Can you legally scale the name you’re investing in?</li>
+                    <li class="flex items-start"><span class="mr-3 text-slate-400 font-bold">[ ]</span> Do you really own it or does someone else hold a piece of it?</li>
+                    <li class="flex items-start"><span class="mr-3 text-slate-400 font-bold">[ ]</span> Are there risks that can stop funding, expansion, or acquisition?</li>
+                    <li class="flex items-start"><span class="mr-3 text-slate-400 font-bold">[ ]</span> Are your agencies, collaborators, or partners creating silent IP gaps?</li>
+                </ul>
+
+                <p>This is where most founders realise things late.<br>
+                <strong class="font-bold text-slate-900 border-b border-slate-300 pb-0.5">And fixing it later is always expensive.</strong></p>
+
+                <div class="text-center my-10 text-slate-300 font-sans tracking-widest">
+                    • • •
+                </div>
+
+                <p>I’m putting together a small, <strong>closed workshop for 30 founders</strong>.</p>
+                
+                <p>If you’re serious about building something you actually own,<br>you can apply.</p>
+
+                <!-- Signature Block -->
+                <div class="mt-12 pt-8 border-t border-slate-200 font-sans flex flex-col items-start w-full">
+                    <p class="font-sans font-bold text-[15px] md:text-[16px] text-slate-800">- Krishna Rathi</p>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- The Problem Section -->
-    <section id="problem" class="section-padding bg-white relative overflow-hidden border-y border-soft">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="max-w-3xl mx-auto text-center reveal mb-16">
-                <p class="micro-text text-slate-400 mb-6">The High Cost of Oversight</p>
-                <h2 class="section-heading font-extrabold tracking-tight text-black mb-8 uppercase leading-[1.1] text-balance">You can dominate your market and still lose your brand.</h2>
-                <p class="text-lg md:text-xl font-light text-slate-600 mb-10 leading-relaxed italic text-balance">Not to competitors. To <span class="text-black font-bold">legal oversights.</span></p>
-                
-                <div class="flex flex-wrap justify-center gap-x-8 gap-y-4">
-                    <div class="flex items-center gap-3 text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest px-4 py-2 border border-soft rounded-full">
-                        <span class="text-red-500 font-bold">✕</span> Wrong trademark class
-                    </div>
-                    <div class="flex items-center gap-3 text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest px-4 py-2 border border-soft rounded-full">
-                        <span class="text-red-500 font-bold">✕</span> Unsigned agreements
-                    </div>
-                    <div class="flex items-center gap-3 text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest px-4 py-2 border border-soft rounded-full">
-                        <span class="text-red-500 font-bold">✕</span> Generic names
-                    </div>
-                    <div class="flex items-center gap-3 text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest px-4 py-2 border border-soft rounded-full">
-                        <span class="text-red-500 font-bold">✕</span> Co-founder disputes
-                    </div>
-                </div>
+    <!-- Page 2: Details & Profiles Section (The Attachment) -->
+    <section id="details" class="pb-32 px-4 md:px-6 relative z-10 flex flex-col items-center font-sans">
+        
+        <div class="letter-paper w-full max-w-[800px] mx-auto p-8 md:p-14 lg:p-16 reveal text-left border-t-0 border-t-transparent shadow-sm">
+            
+            <div class="border-b border-slate-200 pb-6 mb-10">
+                <h2 class="font-typewriter text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Workshop Logistics & Facilitators</h2>
             </div>
-        </div>
-    </section>
 
-    <!-- Evidence Section - Newspaper Audit Report -->
-    <section id="evidence" class="section-padding bg-[#f4f4f2] relative overflow-hidden">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="news-paper reveal">
-                <div class="news-header">
-                    <p class="text-[10px] font-black tracking-[0.5em] mb-4">BREAKING AUDIT REPORT: BRAND EXISTENCE UNDER SCRUTINY</p>
-                    <h2 class="text-4xl md:text-6xl news-headline">Market Evidence</h2>
-                    <div class="flex justify-between border-t border-black mt-4 pt-2">
-                        <span class="text-[9px] font-bold uppercase">Volume 01 // Issue 2024-25</span>
-                        <span class="text-[9px] font-bold uppercase">Strategic Risk Intelligence</span>
-                    </div>
-                </div>
-
-                <div class="grid lg:grid-cols-2 gap-12">
-                    <!-- Case Study 1 -->
-                    <div class="news-column">
-                        <p class="text-[10px] font-black text-red-600 mb-2">BY ORDER OF THE MADRAS HIGH COURT</p>
-                        <h3 class="text-3xl font-black news-headline mb-6">Court Orders Global Giant Cognizant to Stop Using Logo</h3>
-                        <p class="font-serif text-lg leading-relaxed text-slate-900 first-letter:text-5xl first-letter:font-black first-letter:mr-3 first-letter:float-left mb-6">
-                            A billion-dollar brand budget couldn't prevent a total market freeze. A smaller entity successfully proved <span class="underline decoration-2 underline-offset-4 font-bold italic">prior use</span>, effectively stripping a tech titan of its visual identity in a high-stakes injunction.
-                        </p>
-                        <div class="mb-8 p-1 bg-white border border-black/10 shadow-sm">
-                             <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1771837576/ChatGPT_Image_Feb_23_2026_02_33_45_PM_wfdtpe.png" alt="Cognizant vs Atyati Logo Comparison" class="w-full h-auto block grayscale hover:grayscale-0 transition-all duration-500">
-                             <p class="text-[9px] font-bold mt-2 px-2 pb-1 text-slate-500 uppercase tracking-tight">Exhibit A: Evidence of prior use leading to injunction (Cognizant vs. Atyati)</p>
-                        </div>
-                        <div class="bg-black text-white p-4">
-                            <p class="text-xs font-bold italic">“Billion-dollar budgets don’t override basic documentation gaps.”</p>
-                        </div>
-                    </div>
-
-                    <!-- Case Study 2 - Reframed Amul Content -->
+            <div class="font-typewriter text-slate-800">
+                
+                <!-- Logistics Data -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 border-b border-slate-200 pb-12">
+                    
                     <div class="flex flex-col">
-                        <p class="text-[10px] font-black text-blue-600 mb-2">BY ORDER OF THE COURT</p>
-                        <h3 class="text-3xl font-black news-headline mb-6 uppercase">AMUL STOPS INNERWEAR BRAND FROM USING ITS NAME</h3>
-                        <p class="font-serif text-lg leading-relaxed text-slate-900 first-letter:text-5xl first-letter:font-black first-letter:mr-3 first-letter:float-left mb-6">
-                            Amul is known for dairy. But when an innerwear brand used the name “Amul Macho,” the company objected. The court agreed. Because Amul is a well-known trademark, its protection goes beyond one industry. It doesn’t matter if the product is different. The name still belongs to them.
-                        </p>
-                        <div class="mb-8 p-1 bg-white border border-black/10 shadow-sm">
-                             <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1771837577/2a468797-d367-4314-a663-1e45885f0708_uum2im.png" alt="Amul vs Amul Macho Logo Comparison" class="w-full h-auto block grayscale hover:grayscale-0 transition-all duration-500">
-                             <p class="text-[9px] font-bold mt-2 px-2 pb-1 text-slate-500 uppercase tracking-tight">Exhibit B: Well-Known mark protection across unrelated sectors (Amul vs. Amul Macho)</p>
-                        </div>
-                        <div class="space-y-4 mb-8">
-                            <div class="border-l-4 border-black pl-6 py-2">
-                                <p class="text-sm font-black uppercase">Big reputation. Stronger legal shield.</p>
-                            </div>
-                        </div>
-                        <div class="bg-blue-600 text-white p-4 mt-auto">
-                            <p class="text-xs font-bold italic">“If your brand becomes famous, the law protects it everywhere.”</p>
-                        </div>
+                        <p class="text-[10px] font-sans font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Schedule</p>
+                        <p class="font-bold text-slate-900 text-base md:text-lg mb-1">Sun, 12 Apr 2026</p>
+                        <p class="text-xs md:text-sm text-slate-600">11:00 AM — 2:00 PM (IST)</p>
                     </div>
+
+                    <div class="flex flex-col">
+                        <p class="text-[10px] font-sans font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Format</p>
+                        <p class="font-bold text-slate-900 text-base md:text-lg mb-1">3-Hour Session</p>
+                        <p class="text-xs md:text-sm text-slate-600">Live, closed Zoom room</p>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <p class="text-[10px] font-sans font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Investment</p>
+                        <p class="font-bold text-slate-900 text-base md:text-lg mb-1">₹1999/-</p>
+                        <p class="text-xs md:text-sm text-slate-600">Strictly 30 seats</p>
+                    </div>
+
                 </div>
 
-                <div class="border-t-4 double border-black mt-12 pt-8 text-center">
-                    <p class="text-[11px] font-black uppercase tracking-widest italic">Conclusion: Don't leave your brand's existence to a court's interpretation.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Workshop Pillars -->
-    <section id="curriculum" class="section-padding bg-black text-white relative overflow-hidden">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="mb-20 md:mb-28 reveal text-center md:text-left">
-                <p class="micro-text text-slate-500 mb-4 tracking-[0.3em]">3-Hour Transformation</p>
-                <h2 class="section-heading font-extrabold tracking-tight text-white uppercase leading-none">This Workshop Fixes That.</h2>
-            </div>
-            
-            <div id="pillars-container" class="relative pl-6 md:pl-20 border-l border-white/10 ml-2 md:ml-0">
-                <div class="pillar-track"><div id="pillar-spine" class="pillar-progress-line"></div></div>
-                
-                <div class="space-y-20 md:space-y-32">
-                    <!-- Point 1 -->
-                    <div class="reveal group pillar-item" data-index="0">
-                        <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-baseline">
-                            <div class="shrink-0 md:w-1/4">
-                                <span class="text-4xl md:text-6xl font-black text-white/10 pillar-number group-hover:text-white transition-all duration-700">01</span>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight">Who Owns Your Brand</h3>
-                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">(Hint: it might not be you). Determine true <span class="text-white font-bold">equity</span> before the scale starts.</p>
-                            </div>
+                <!-- Facilitator Profiles -->
+                <div class="space-y-12">
+                    
+                    <!-- Krishna Rathi -->
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-start group">
+                        <div class="w-20 h-20 md:w-28 md:h-28 shrink-0 profile-img-wrap rounded-full border border-slate-200 p-1">
+                            <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" alt="Krishna Rathi" class="w-full h-full object-cover rounded-full">
                         </div>
-                    </div>
-                    <!-- Point 2 -->
-                    <div class="reveal group pillar-item" data-index="1">
-                        <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-baseline">
-                            <div class="shrink-0 md:w-1/4">
-                                <span class="text-4xl md:text-6xl font-black text-white/10 pillar-number group-hover:text-white transition-all duration-700">02</span>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight">Validating Names</h3>
-                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">Learn the <span class="text-white font-bold">framework</span> to validate names before you spend lakhs on them.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Point 3 -->
-                    <div class="reveal group pillar-item" data-index="2">
-                        <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-baseline">
-                            <div class="shrink-0 md:w-1/4">
-                                <span class="text-4xl md:text-6xl font-black text-white/10 pillar-number group-hover:text-white transition-all duration-700">03</span>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight">Trademark Strategy</h3>
-                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">Aligning your <span class="text-white font-bold">IP filings</span> with your funding roadmap and <span class="text-white font-bold">exit goals</span>.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Point 4 -->
-                    <div class="reveal group pillar-item" data-index="3">
-                        <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-baseline">
-                            <div class="shrink-0 md:w-1/4">
-                                <span class="text-4xl md:text-6xl font-black text-white/10 pillar-number group-hover:text-white transition-all duration-700">04</span>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight">The Legal Traps</h3>
-                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">Identifying <span class="text-white font-bold">loopholes</span> in agency contracts, influencer deals, and co-founder splits.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Point 5 -->
-                    <div class="reveal group pillar-item" data-index="4">
-                        <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-baseline">
-                            <div class="shrink-0 md:w-1/4">
-                                <span class="text-4xl md:text-6xl font-black text-white/10 pillar-number group-hover:text-white transition-all duration-700">05</span>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight">The Unfundable Brand</h3>
-                                <p class="text-slate-400 italic text-base md:text-lg leading-relaxed text-balance">Why some brands are toxic to investors and how to <span class="text-white font-bold">fix the documentation</span> today.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-24 md:mt-40 p-10 md:p-14 border border-white/10 rounded-sm bg-white/5 backdrop-blur-sm reveal max-w-4xl mx-auto text-center">
-                <p class="text-xl md:text-2xl font-light leading-relaxed italic text-balance">
-                    "No legal jargon. No theory. <br class="hidden md:block">Just <span class="text-white font-bold not-italic">brand protection</span> that founders actually need."
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Who This Is For - Premium Redesigned Section -->
-    <section id="audience" class="section-padding bg-white relative overflow-hidden">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-20 md:mb-32 reveal">
-                <p class="micro-text text-slate-400 mb-6 uppercase font-bold text-[10px] tracking-[0.4em]">CURATED SELECTION</p>
-                <h2 class="text-5xl md:text-7xl font-black text-black uppercase leading-none tracking-tighter">NOT FOR EVERYONE</h2>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-px bg-slate-200 border-y border-slate-200">
-                <!-- For You -->
-                <div class="bg-white audience-column reveal md:pr-12 md:border-r border-slate-200">
-                    <div class="flex items-center gap-4 mb-12">
-                        <span class="w-1.5 h-1.5 bg-[#40EADB] rounded-full"></span>
-                        <h4 class="text-2xl font-black uppercase tracking-tighter leading-none">You belong here, if</h4>
-                    </div>
-                    <ul class="space-y-8">
-                        <li class="flex items-start gap-5 group">
-                            <span class="text-[#40EADB] text-lg font-black leading-none mt-1">→</span>
-                            <p class="text-lg font-medium text-slate-800 leading-tight">You've already invested in branding or marketing.</p>
-                        </li>
-                        <li class="flex items-start gap-5 group">
-                            <span class="text-[#40EADB] text-lg font-black leading-none mt-1">→</span>
-                            <p class="text-lg font-medium text-slate-800 leading-tight">You're building D2C, consumer, or tech brands.</p>
-                        </li>
-                        <li class="flex items-start gap-5 group">
-                            <span class="text-[#40EADB] text-lg font-black leading-none mt-1">→</span>
-                            <p class="text-lg font-medium text-slate-800 leading-tight">You plan to raise capital or scale aggressively.</p>
-                        </li>
-                        <li class="flex items-start gap-5 group">
-                            <span class="text-[#40EADB] text-lg font-black leading-none mt-1">→</span>
-                            <p class="text-lg font-medium text-slate-800 leading-tight">Your brand name has real market value.</p>
-                        </li>
-                        <li class="flex items-start gap-5 group">
-                            <span class="text-[#40EADB] text-lg font-black leading-none mt-1">→</span>
-                            <p class="text-lg font-medium text-slate-800 leading-tight">You refuse to lose what you built.</p>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Not For You -->
-                <div class="bg-[#f9fafb] audience-column reveal md:pl-12">
-                    <div class="flex items-center gap-4 mb-12">
-                        <span class="w-1.5 h-1.5 bg-slate-300 rounded-full"></span>
-                        <h4 class="text-2xl font-black uppercase tracking-tighter leading-none text-slate-400">You don't, if</h4>
-                    </div>
-                    <ul class="space-y-8 opacity-60">
-                        <li class="flex items-start gap-5 group">
-                            <span class="text-slate-300 text-lg font-black leading-none mt-1">✕</span>
-                            <p class="text-lg font-medium text-slate-500 leading-tight">You're a student or early ideation stage.</p>
-                        </li>
-                        <li class="flex items-start gap-5 group">
-                            <span class="text-slate-300 text-lg font-black leading-none mt-1">✕</span>
-                            <p class="text-lg font-medium text-slate-500 leading-tight">You want a "how to file trademarks" tutorial.</p>
-                        </li>
-                        <li class="flex items-start gap-5 group">
-                            <span class="text-slate-300 text-lg font-black leading-none mt-1">✕</span>
-                            <p class="text-lg font-medium text-slate-500 leading-tight">You're running a hobby project.</p>
-                        </li>
-                        <li class="flex items-start gap-5 group">
-                            <span class="text-slate-300 text-lg font-black leading-none mt-1">✕</span>
-                            <p class="text-lg font-medium text-slate-500 leading-tight">You don't plan to scale seriously.</p>
-                        </li>
-                        <li class="flex items-start gap-5 group">
-                            <span class="text-slate-300 text-lg font-black text-slate-500 leading-none mt-1">✕</span>
-                            <p class="text-lg font-medium text-slate-500 leading-tight">You're looking for generic IP awareness.</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Facilitator -->
-    <section class="section-padding bg-black text-white relative">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="mb-16 md:mb-24 text-center reveal">
-                <h2 class="section-heading font-extrabold uppercase tracking-tight leading-none">OWN IT.</h2>
-                <p class="mt-6 text-slate-400 italic text-lg max-w-2xl mx-auto leading-relaxed text-balance">The difference between building a brand and truly owning one.</p>
-            </div>
-
-            <div class="max-w-5xl mx-auto">
-                <!-- LED BY Heading: Professionally positioned and aligned with the profile card -->
-                <div class="mb-10 text-center md:text-left reveal">
-                    <p class="text-[10px] font-black text-[#40EADB] uppercase tracking-[0.5em]">THIS WORKSHOP IS LED BY</p>
-                </div>
-
-                <div class="facilitator-block reveal">
-                    <div class="speaker-info-card">
-                        <div class="profile-image-wrapper mb-10 group shadow-2xl">
-                            <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" alt="Krishna Rathi" class="parallax-img profile-trigger">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
-                        </div>
-                        <h3 class="text-3xl md:text-4xl font-extrabold uppercase mb-2 leading-none tracking-tighter">Krishna Rathi</h3>
-                        <p class="text-brand-teal text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-4">Brand Strategist • Lawyer</p>
-                        <!-- Facilitator Socials -->
-                        <div class="flex gap-6 mb-10">
-                            <a href="https://x.com/rathikrishna42?s=11" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="X">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                            </a>
-                            <a href="https://www.instagram.com/rathikrishna42/" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="Instagram">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                            </a>
-                            <a href="https://www.linkedin.com/in/rathikrishna42/" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="LinkedIn">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                            </a>
-                        </div>
-                        <!-- Updated Bio Section with pointers aesthetically positioned -->
-                        <div class="text-slate-400 font-light leading-relaxed mb-8 border-l border-white/10 pl-6 text-base md:text-lg">
-                            <p class="mb-6">A branding strategist with a decade of experience building, scaling, and protecting brands across industries.</p>
-                            <p class="mb-4">Krishna has worked on 2,000+ brand concepts, advising founders on:</p>
-                            <ul class="space-y-3 opacity-90 pl-2">
-                                <li class="flex items-start gap-4 transition-transform hover:translate-x-1 duration-300">
-                                    <span class="mt-2.5 w-1.5 h-1.5 bg-[#40EADB] rounded-full shadow-[0_0_8px_rgba(64,234,217,0.6)] shrink-0"></span>
-                                    <span>Brand architecture</span>
-                                </li>
-                                <li class="flex items-start gap-4 transition-transform hover:translate-x-1 duration-300">
-                                    <span class="mt-2.5 w-1.5 h-1.5 bg-[#40EADB] rounded-full shadow-[0_0_8px_rgba(64,234,217,0.6)] shrink-0"></span>
-                                    <span>Naming strategy</span>
-                                </li>
-                                <li class="flex items-start gap-4 transition-transform hover:translate-x-1 duration-300">
-                                    <span class="mt-2.5 w-1.5 h-1.5 bg-[#40EADB] rounded-full shadow-[0_0_8px_rgba(64,234,217,0.6)] shrink-0"></span>
-                                    <span>Scale-ready identity systems</span>
-                                </li>
-                                <li class="flex items-start gap-4 transition-transform hover:translate-x-1 duration-300">
-                                    <span class="mt-2.5 w-1.5 h-1.5 bg-[#40EADB] rounded-full shadow-[0_0_8px_rgba(64,234,217,0.6)] shrink-0"></span>
-                                    <span>Long-term brand equity</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="outcome-info-card flex flex-col justify-center">
-                        <h4 class="text-xl font-bold uppercase tracking-tighter mb-12 border-b border-white/10 pb-4">The Promise</h4>
-                        <div class="space-y-12">
-                            <div class="flex gap-8 group">
-                                <span class="text-brand-teal font-black text-3xl opacity-40 group-hover:opacity-100 transition-opacity">01</span>
-                                <div>
-                                    <p class="font-bold text-white uppercase text-xs tracking-widest mb-2">No Certificates</p>
-                                    <p class="text-slate-400 text-sm md:text-base leading-relaxed">You won't leave with paper. You'll leave with <span class="text-white font-medium">control</span>.</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-8 group">
-                                <span class="text-brand-teal font-black text-3xl opacity-40 group-hover:opacity-100 transition-opacity">02</span>
-                                <div>
-                                    <p class="font-bold text-white uppercase text-xs tracking-widest mb-2">Absolute Clarity</p>
-                                    <p class="text-slate-400 text-sm md:text-base leading-relaxed">Total insight into what's protected, what's exposed, and what to fix now.</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-8 group">
-                                <span class="text-brand-teal font-black text-3xl opacity-40 group-hover:opacity-100 transition-opacity">03</span>
-                                <div>
-                                    <p class="font-bold text-white uppercase text-xs tracking-widest mb-2">Strategic Defense</p>
-                                    <p class="text-slate-400 text-sm md:text-base leading-relaxed">Equipping your brand for future funding rounds and acquisitions.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Message Section -->
-                <div class="mt-16 text-center reveal max-w-4xl mx-auto px-6">
-                    <p class="text-lg md:text-xl font-light text-slate-400 italic leading-relaxed text-balance">
-                        "I’ve seen brands lose years of work not because they failed, but because they didn’t legally own what they built."
-                    </p>
-                </div>
-
-                <!-- Advisory Section - Profile Integrated Layout -->
-                <div class="mt-16 md:mt-24 reveal border-t border-white/10 pt-16">
-                    <div class="mb-10 text-center md:text-left">
-                        <p class="text-[10px] font-black text-[#40EADB] uppercase tracking-[0.5em]">This workshop is advised by</p>
-                    </div>
-                    <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
-                        <div class="relative group shrink-0">
-                            <div class="absolute -inset-1 bg-gradient-to-r from-[#40EADB]/20 to-transparent rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-                            <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border border-white/10 relative grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl">
-                                 <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770451145/1710957296193_zss2ry.jpg" 
-                                      alt="Vishal Panjwani" 
-                                      class="w-full h-full object-cover">
-                                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                            </div>
-                        </div>
-                        <div class="flex-1 text-center md:text-left">
-                            <h4 class="text-3xl md:text-5xl font-extrabold text-white uppercase tracking-tighter mb-2 leading-none">Vishal Panjwani</h4>
-                            <p class="text-slate-400 text-xs md:text-sm font-bold uppercase tracking-widest mb-8">CS, Trademark Expert & Legal Advisor</p>
+                        <div class="flex-1">
+                            <p class="text-[10px] font-sans font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Led By</p>
+                            <h4 class="text-lg md:text-xl font-bold text-slate-900 mb-1">Krishna Rathi</h4>
+                            <p class="text-[11px] md:text-xs font-sans text-slate-500 uppercase tracking-widest mb-3">Brand Strategist • Lawyer</p>
                             
-                            <p class="text-slate-500 font-light italic text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
+                            <p class="text-xs md:text-sm leading-relaxed text-slate-600 mb-4">
+                                A branding strategist with a decade of experience building, scaling, and protecting brands. Krishna has worked on 2,000+ brand concepts, advising founders on long-term brand equity and scale-ready identity systems.
+                            </p>
+
+                            <div class="flex gap-4">
+                                <a href="https://x.com/rathikrishna42?s=11" target="_blank" class="text-slate-400 hover:text-slate-800 transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                                <a href="https://www.instagram.com/rathikrishna42/" target="_blank" class="text-slate-400 hover:text-slate-800 transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                                <a href="https://www.linkedin.com/in/rathikrishna42/" target="_blank" class="text-slate-400 hover:text-slate-800 transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vishal Panjwani -->
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-start group">
+                        <div class="w-20 h-20 md:w-28 md:h-28 shrink-0 profile-img-wrap rounded-full border border-slate-200 p-1">
+                            <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770451145/1710957296193_zss2ry.jpg" alt="Vishal Panjwani" class="w-full h-full object-cover rounded-full">
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-[10px] font-sans font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Advised By</p>
+                            <h4 class="text-lg md:text-xl font-bold text-slate-900 mb-1">Vishal Panjwani</h4>
+                            <p class="text-[11px] md:text-xs font-sans text-slate-500 uppercase tracking-widest mb-3">CS, Trademark Expert</p>
+                            
+                            <p class="text-xs md:text-sm leading-relaxed text-slate-600 mb-4 italic">
                                 "This workshop is strategically designed to provide founders with a clear roadmap for safeguarding their brand's intellectual equity."
                             </p>
 
-                            <div class="flex justify-center md:justify-start gap-8">
-                                <a href="https://www.instagram.com/weshallmusic" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="Instagram">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                                </a>
-                                <a href="https://www.linkedin.com/in/csvishalpanjwani/" target="_blank" class="text-white/30 hover:text-white transition-colors" aria-label="LinkedIn">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                                </a>
+                            <div class="flex gap-4">
+                                <a href="https://www.linkedin.com/in/csvishalpanjwani/" target="_blank" class="text-slate-400 hover:text-slate-800 transition-colors"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Investment Section -->
-    <section id="investment" class="section-padding bg-white relative overflow-hidden">
-        <div class="max-w-4xl mx-auto px-6 text-center reveal">
-            <p class="micro-text text-slate-400 mb-6 uppercase font-bold text-[10px] tracking-[0.4em]">One-Time Investment</p>
-            <h2 class="text-6xl md:text-8xl font-black text-black uppercase leading-none tracking-tighter mb-8">₹1999/-</h2>
-            <div class="max-w-xl mx-auto space-y-4">
-                <div class="inline-block px-6 py-2 border-2 border-black rounded-sm bg-black text-white mb-6">
-                    <p class="text-xs font-bold uppercase tracking-widest leading-none">Seat subject to confirmation</p>
-                </div>
-                <p class="text-slate-500 italic text-sm md:text-base leading-relaxed text-balance">
-                    Due to the high-stakes nature of this cohort, we manually review every profile.
-                    <span class="text-black font-bold block mt-2">A payment link will be shared only once your application is accepted.</span>
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="section-padding bg-[#000] relative overflow-hidden border-t border-white/10">
-        <div class="max-w-4xl mx-auto px-6 text-center reveal relative z-10">
-            <h2 class="hero-heading font-black text-white uppercase mb-8 leading-tight">Limited Seats. <br>Founder-Only Cohort.</h2>
-            <p class="text-slate-500 text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] mb-12">This isn't a webinar. It's a curated session.</p>
-            
-            <div class="glass-card !bg-white/5 border-white/10 p-10 md:p-20 relative rounded-lg shadow-2xl flex flex-col items-center">
-                <!-- Professional Layout for the Statement -->
-                <div class="mb-14 text-center max-w-3xl mx-auto">
-                    <h3 class="text-2xl md:text-4xl font-bold text-white tracking-tight uppercase leading-tight">
-                        For founders who <span class="text-[#40EADB]">refuse to lose</span><br>what they built.
-                    </h3>
                 </div>
 
-                <div class="flex flex-col items-center gap-8 w-full max-w-sm">
-                    <button onclick="openEnquiryModal()" class="cta-primary !bg-white !text-black px-16 py-6 rounded-sm font-black text-sm uppercase tracking-[0.4em] shadow-2xl transition-all hover:scale-105 active:scale-95 w-full">Apply to Join →</button>
-                    <div class="flex flex-col gap-1.5 items-center text-center">
-                        <p class="text-xs md:text-sm font-bold text-white uppercase tracking-[0.2em]">Sunday, 12th April 2026</p>
-                        <p class="text-sm md:text-base font-black text-[#40EADB] uppercase tracking-[0.2em] drop-shadow-[0_0_8px_rgba(64,234,219,0.3)]">11 AM Onwards</p>
-                        <p class="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-[0.3em] mt-1">3-Hour Workshop</p>
+                <!-- Application Block Moved Here -->
+                <div class="mt-16 pt-10 border-t border-slate-200 font-sans flex flex-col items-start w-full">
+                    <button onclick="openEnquiryModal()" class="cta-primary px-8 py-3.5 rounded-sm font-bold text-xs uppercase tracking-[0.2em] w-full sm:w-auto text-center border-none mb-5">
+                        Apply for a Seat →
+                    </button>
+                    <div class="flex flex-col gap-1.5 border-l-2 border-[#40EADB] pl-4">
+                        <p class="text-[11px] text-slate-500 font-medium tracking-wide">Due to the high-stakes nature of this cohort, we manually review every profile.</p>
+                        <p class="text-[11px] text-slate-500 font-medium tracking-wide">A payment link will be shared only once your application is accepted.</p>
                     </div>
                 </div>
+
             </div>
         </div>
-        <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 md:py-20 border-t border-soft bg-white">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12">
-            <div class="flex items-center gap-3">
-                <div class="w-6 h-6 bg-black rounded-sm flex items-center justify-center shadow-lg"><span class="text-white text-[9px] font-bold">X</span></div>
-                <span class="font-bold text-xs tracking-[0.2em] uppercase">BUILD BRANDS LEGALLY</span>
+    <footer class="py-12 border-t border-soft bg-[#f4f4f2] font-sans">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col items-center justify-center gap-6 text-center">
+            <div class="flex items-center gap-3 opacity-40">
+                <div class="w-5 h-5 bg-black flex items-center justify-center"><span class="text-white text-[7px] font-bold">X</span></div>
+                <span class="font-bold text-[9px] tracking-[0.2em] uppercase text-black">Brand Vigilance</span>
             </div>
-            <div class="flex flex-col md:flex-row items-center gap-6 md:gap-12">
-                <div class="flex gap-8">
-                    <a href="https://x.com/rathikrishna42?s=11" target="_blank" class="text-slate-400 hover:text-black transition-colors" aria-label="X">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    </a>
-                    <a href="https://www.instagram.com/rathikrishna42/" target="_blank" class="text-slate-400 hover:text-black transition-colors" aria-label="Instagram">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/rathikrishna42/" target="_blank" class="text-slate-400 hover:text-black transition-colors" aria-label="LinkedIn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                    </a>
-                </div>
-                <p class="text-[10px] text-slate-400 uppercase tracking-widest font-medium">&copy; 2026 Krishna Rathi.</p>
-            </div>
+            <p class="text-[9px] text-slate-400 uppercase tracking-widest font-bold">&copy; 2026 Krishna Rathi.</p>
         </div>
     </footer>
 
     <script>
-        // Scroll Reveals
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, observerOptions);
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Modal Logic
         function openEnquiryModal() {
             const modal = document.getElementById('enquiry-modal');
             modal.style.display = 'flex';
@@ -814,51 +407,36 @@
             }, 500);
         }
 
-        // Live Form Submission Logic - Updated for Instant Response
         function handleRequestSubmit(e) {
             e.preventDefault();
-
             const form = e.target;
             const btn = form.querySelector('button');
             const originalText = btn.innerText;
 
-            // Instant Button Feedback
-            btn.innerText = 'SUBMITTED';
+            btn.innerText = 'PROCESSING...';
             btn.disabled = true;
 
             const formData = {
                 fullName: form.querySelectorAll('input')[0].value,
                 brandName: form.querySelectorAll('input')[1].value,
                 email: form.querySelectorAll('input')[2].value,
-                revenue: form.querySelectorAll('input')[3].value, // Updated to match new input index
-                stage: form.querySelectorAll('select')[0].value,  // Updated to match new select index
+                revenue: form.querySelectorAll('input')[3].value, 
+                stage: form.querySelectorAll('select')[0].value,  
                 concern: form.querySelectorAll('textarea')[0].value,
-                whyNow: form.querySelectorAll('textarea')[1].value
             };
 
-            // New Web App URL integrated
             const webAppUrl = "https://script.google.com/macros/s/AKfycbxl_vp4oW9AeOEUoyBS3OOg50NZXYY1cv12z2witfQw4QaWE0RjAGyoHaToMfDcB-k/exec";
 
-            // Fire request in background
             fetch(webAppUrl, {
-                method: "POST",
-                mode: 'no-cors', 
-                body: JSON.stringify(formData),
-                headers: {
-                    "Content-Type": "text/plain;charset=utf-8"
-                }
-            }).catch(error => {
-                console.error("Background submission error:", error);
-            });
+                method: "POST", mode: 'no-cors', 
+                body: JSON.stringify(formData), headers: { "Content-Type": "text/plain;charset=utf-8" }
+            }).catch(error => console.error("Error:", error));
 
-            // Instant UI Transition to Success Message
             document.getElementById('requestForm').classList.add('hidden');
             document.getElementById('success-message').classList.remove('hidden');
 
-            // Handle modal closure and reset
             setTimeout(() => {
                 closeEnquiryModal();
-
                 setTimeout(() => {
                     document.getElementById('requestForm').classList.remove('hidden');
                     document.getElementById('success-message').classList.add('hidden');
@@ -869,7 +447,6 @@
             }, 3000);
         }
 
-        // 3D Background
         let scene, camera, renderer, cloud;
         function init3D() {
             const container = document.getElementById('canvas-container');
@@ -892,12 +469,7 @@
                 );
             }
             geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-            const material = new THREE.PointsMaterial({ 
-                color: 0x000000, 
-                size: 2.5, 
-                transparent: true, 
-                opacity: 0.08 
-            });
+            const material = new THREE.PointsMaterial({ color: 0x000000, size: 2.5, transparent: true, opacity: 0.05 });
             cloud = new THREE.Points(geometry, material);
             scene.add(cloud);
             camera.position.z = 500;
@@ -905,10 +477,7 @@
 
         function animate3D() {
             requestAnimationFrame(animate3D);
-            if(cloud) {
-                cloud.rotation.y += 0.0003;
-                cloud.rotation.x += 0.0001;
-            }
+            if(cloud) { cloud.rotation.y += 0.0003; cloud.rotation.x += 0.0001; }
             renderer.render(scene, camera);
         }
 
@@ -919,74 +488,12 @@
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
-
-        // Parallax & Scroll Effects
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const viewportHeight = window.innerHeight;
-            const viewportCenter = viewportHeight / 2;
-
-            // Curriculum Spine
-            const spine = document.getElementById('pillar-spine');
-            const container = document.getElementById('pillars-container');
-            if (spine && container) {
-                const rect = container.getBoundingClientRect();
-                let progress = (viewportCenter - rect.top) / rect.height;
-                progress = Math.max(0, Math.min(1, progress));
-                const spineHeight = 150;
-                spine.style.setProperty('--pillar-y', `${progress * (rect.height - spineHeight)}px`);
-
-                // Highlight Active Pillar Number
-                const pillars = document.querySelectorAll('.pillar-item');
-                pillars.forEach((pillar, i) => {
-                    const pRect = pillar.getBoundingClientRect();
-                    const num = pillar.querySelector('.pillar-number');
-                    // Check if the pillar's center is near the viewport center
-                    const pCenter = pRect.top + pRect.height / 2;
-                    if (Math.abs(pCenter - viewportCenter) < pRect.height / 2) {
-                        num.classList.add('active');
-                    } else {
-                        num.classList.remove('active');
-                    }
-                });
-            }
-
-            // Profile Images & General Parallax
-            document.querySelectorAll('.parallax-img').forEach(img => {
-                const wrapper = img.parentElement;
-                const rect = wrapper.getBoundingClientRect();
-                const center = rect.top + rect.height / 2;
-                const dist = (viewportCenter - center) * 0.08;
-                img.style.setProperty('--img-parallax', `${Math.max(-10, Math.min(10, dist))}%`);
-                
-                // Color Reveal
-                if (rect.top < viewportHeight * 0.8 && rect.bottom > viewportHeight * 0.2) {
-                    img.classList.add('revealed');
-                } else {
-                    img.classList.remove('revealed');
-                }
-            });
-        }, { passive: true });
-
-        // Smooth Scroll Fix
+        
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                const target = document.querySelector(targetId);
-                if (target) {
-                    const offset = 64; // Header height
-                    const bodyRect = document.body.getBoundingClientRect().top;
-                    const elementRect = target.getBoundingClientRect().top;
-                    const elementPosition = elementRect - bodyRect;
-                    const offsetPosition = elementPosition - offset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
             });
         });
     </script>
