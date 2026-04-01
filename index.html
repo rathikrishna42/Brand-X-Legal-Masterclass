@@ -78,7 +78,9 @@
 
         .reveal {
             opacity: 0; transform: translateY(20px);
-            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+            transition-property: all;
+            transition-duration: 1s;
+            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -203,36 +205,36 @@
             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#f4f4f2]/80 to-[#f4f4f2]"></div>
         </div>
         
-        <div class="relative z-10 text-center px-4 flex flex-col items-center w-full max-w-4xl mx-auto reveal active mt-12 md:mt-0">
+        <div class="relative z-10 text-center px-4 flex flex-col items-center w-full max-w-4xl mx-auto mt-12 md:mt-0">
             
-            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-10 md:mb-14 uppercase tracking-[0.1em] drop-shadow-sm">Do You Belong To Any Of These?</h2>
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-10 md:mb-14 uppercase tracking-[0.1em] drop-shadow-sm reveal">Do You Belong To Any Of These?</h2>
             
             <ul class="text-left space-y-6 md:space-y-8 mb-16 text-lg md:text-xl lg:text-2xl text-slate-800 list-none px-2 md:px-8">
-                <li class="flex items-start">
+                <li class="flex items-start reveal delay-100">
                     <span class="mr-4 text-slate-400">—</span>
                     <span>You’ve already invested money into branding or marketing</span>
                 </li>
-                <li class="flex items-start">
+                <li class="flex items-start reveal delay-200">
                     <span class="mr-4 text-slate-400">—</span>
                     <span>You’re planning to scale, raise funds, or license your brand</span>
                 </li>
-                <li class="flex items-start">
+                <li class="flex items-start reveal delay-300">
                     <span class="mr-4 text-slate-400">—</span>
                     <span>Your brand name, logo, or identity actually matters to you</span>
                 </li>
-                <li class="flex items-start">
+                <li class="flex items-start reveal delay-[400ms]">
                     <span class="mr-4 text-slate-400">—</span>
                     <span>You don’t want unexpected legal risks later</span>
                 </li>
             </ul>
 
-            <div class="mb-24 flex flex-col items-center text-slate-500 opacity-80 animate-bounce">
+            <div class="mb-24 flex flex-col items-center text-slate-500 opacity-80 animate-bounce reveal delay-500">
                 <p class="text-xs md:text-sm uppercase tracking-[0.2em] font-bold">If yes, keep scrolling ↓</p>
             </div>
 
-            <div class="w-24 h-[1px] bg-slate-300 mb-20"></div>
+            <div class="w-24 h-[1px] bg-slate-300 mb-20 reveal delay-[600ms]"></div>
 
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center reveal delay-[700ms]">
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-[0.25em] text-slate-900 mb-6 drop-shadow-sm leading-tight">BUILD BRANDS LEGALLY</h1>
                 <div class="flex flex-col items-center justify-center mt-2">
                     <span class="text-xs md:text-sm lg:text-base uppercase tracking-[0.2em] text-slate-600 font-bold mb-1">A Workshop by</span>
@@ -346,7 +348,7 @@
                 <div class="space-y-12">
                     
                     <!-- Krishna Rathi -->
-                    <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-start group">
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-start group reveal">
                         <div class="w-20 h-20 md:w-28 md:h-28 shrink-0 profile-img-wrap rounded-full border border-slate-200 p-1">
                             <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770457740/619675966_25578261651824549_5944694729791208436_n_wp9vzm.jpg" alt="Krishna Rathi" class="w-full h-full object-cover rounded-full">
                         </div>
@@ -371,7 +373,7 @@
                     </div>
 
                     <!-- Vishal Panjwani -->
-                    <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-start group">
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-start group reveal delay-200">
                         <div class="w-20 h-20 md:w-28 md:h-28 shrink-0 profile-img-wrap rounded-full border border-slate-200 p-1">
                             <img src="https://res.cloudinary.com/dj159rgsr/image/upload/v1770451145/1710957296193_zss2ry.jpg" alt="Vishal Panjwani" class="w-full h-full object-cover rounded-full">
                         </div>
@@ -405,7 +407,7 @@
 
                     <div class="flex flex-col">
                         <!-- Card 1 -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 relative py-6 md:py-8 border-b border-slate-200 last:border-0">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 relative py-6 md:py-8 border-b border-slate-200 last:border-0 reveal">
                             <div class="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-300 z-10">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </div>
@@ -420,7 +422,7 @@
                         </div>
 
                         <!-- Card 2 -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 relative py-6 md:py-8 border-b border-slate-200 last:border-0">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 relative py-6 md:py-8 border-b border-slate-200 last:border-0 reveal delay-100">
                             <div class="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-300 z-10">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </div>
@@ -435,7 +437,7 @@
                         </div>
 
                         <!-- Card 3 -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 relative py-6 md:py-8 border-b border-slate-200 last:border-0">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 relative py-6 md:py-8 border-b border-slate-200 last:border-0 reveal delay-200">
                             <div class="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-300 z-10">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </div>
@@ -450,7 +452,7 @@
                         </div>
 
                         <!-- Card 4 -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 relative py-6 md:py-8 border-b border-slate-200 last:border-0">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 relative py-6 md:py-8 border-b border-slate-200 last:border-0 reveal delay-300">
                             <div class="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-300 z-10">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </div>
@@ -465,7 +467,7 @@
                         </div>
 
                         <!-- Card 5 -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 relative py-6 md:py-8 border-b border-slate-200 last:border-0">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 relative py-6 md:py-8 border-b border-slate-200 last:border-0 reveal delay-[400ms]">
                             <div class="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-300 z-10">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </div>
